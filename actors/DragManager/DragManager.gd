@@ -23,14 +23,14 @@ func _unhandled_input(event):
 				if held_draggable.current_drag_target != null:
 					held_draggable.current_drag_target.unslot(held_draggable)
 				held_draggable.unslot()
-				held_draggable.move_back_to_original_position()
+				held_draggable.move_back_to_position()
 			else:
 				var canSlot = entered_drag_target.can_slot_draggable(held_draggable)
 				if canSlot:
 					held_draggable.slot(entered_drag_target)
 					entered_drag_target.slot(held_draggable)
 				else:
-					held_draggable.move_back_to_original_position()
+					held_draggable.move_back_to_position()
 			held_draggable = null
 
 func _on_draggable_clicked(draggable: Draggable):

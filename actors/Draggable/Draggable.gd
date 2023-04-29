@@ -70,6 +70,10 @@ func slot(drag_target: DragTarget):
 func unslot():
 	current_drag_target = null
 
-func move_back_to_original_position():
+func move_back_to_position():
+	var target_position = original_position
+	if current_drag_target != null:
+		target_position = last_slotted_position
+	
 	var translate_tween = create_tween()
-	translate_tween.tween_property(self, "position", original_position, .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	translate_tween.tween_property(self, "position", target_position, .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
