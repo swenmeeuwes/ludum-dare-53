@@ -93,7 +93,7 @@ func rotate_clockwise():
 	if not can_rotate:
 		return
 	
-	print("rotate!")
+	#print("rotate!")
 	
 	can_rotate = false
 	
