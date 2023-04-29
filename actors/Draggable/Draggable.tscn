@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqryi0j7f0gq5"]
+
+[ext_resource type="Script" path="res://actors/Draggable/Draggable.gd" id="1_dp1wd"]
+[ext_resource type="Texture2D" uid="uid://drgflp3uuwvxg" path="res://assets/white1x1.png" id="2_ckk3u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0owt"]
+size = Vector2(32, 32)
+
+[node name="Draggable" type="RigidBody2D" groups=["draggable"]]
+position = Vector2(81, 44)
+gravity_scale = 0.0
+script = ExtResource("1_dp1wd")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(2.98023e-08, 0)
+scale = Vector2(32, 32)
+texture = ExtResource("2_ckk3u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i0owt")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
