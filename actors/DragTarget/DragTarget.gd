@@ -25,12 +25,21 @@ func slot(draggable: Draggable):
 	slotted_draggables.append(draggable)
 
 func unslot(draggable: Draggable):
+	var draggable_center_offset_compensation = Vector2(draggable.shape[0].size() * .5, draggable.shape.size() * .5) * cell_size
 	var relative_position = draggable.last_slotted_position - position
+	
+	# Remove any previously added offset
+	if (draggable.shape[0].size() - 1) * .5 != draggable.shape_center.x:
+		relative_position.x -= draggable_center_offset_compensation.x
+	
+	if (draggable.shape.size() - 1) * .5 != draggable.shape_center.y:
+		relative_position.y -= draggable_center_offset_compensation.y * ((draggable.shape.size() - 1) * .5)
+	
 	var shape_position = _relative_position_to_shape_index_position(relative_position)
 	print(shape_position)
 	free_slots(draggable, shape_position, draggable.shape_center)
 	
-	print(available_slots)
+#	print(available_slots)
 	
 	var removeIndex = slotted_draggables.find(draggable)
 	slotted_draggables.remove_at(removeIndex)
@@ -51,6 +60,8 @@ func draggable_position_to_slot_position(draggable):
 	var half_cell_size = Vector2.ONE * cell_size * .5
 
 	var target_position = position + -half_size + shape_position * cell_size + half_cell_size
+	
+	# Add offset so that the visuals snap nicely
 	if (draggable.shape[0].size() - 1) * .5 != draggable.shape_center.x:
 		target_position.x += draggable_center_offset_compensation.x
 	

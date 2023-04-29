@@ -47,7 +47,8 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
 
 func _process(delta):
 	if held:
-		global_transform.origin = get_global_mouse_position()# + Vector2((shape_center.x * .5), (shape_center.y * .5)) * cell_size
+		var new_pos = get_global_mouse_position()# + Vector2((shape_center.x * .5), (shape_center.y * .5)) * cell_size
+		global_transform.origin = new_pos
 
 func drag_start():
 	if held:

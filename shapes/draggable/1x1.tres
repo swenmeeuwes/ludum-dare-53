@@ -7,3 +7,4 @@
 script = ExtResource("1_m1ubv")
 texture = ExtResource("2_61fyi")
 shape = [[1]]
+shape_center = Vector2(0, 0)
