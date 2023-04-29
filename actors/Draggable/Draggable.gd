@@ -50,7 +50,15 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
 
 func _process(delta):
 	if held:
-		var new_pos = get_global_mouse_position()# + Vector2((shape_center.x * .5), (shape_center.y * .5)) * cell_size
+		var new_pos = get_global_mouse_position()
+		
+		var draggable_center_offset_compensation = Vector2(shape[0].size() * .5, shape.size() * .5) * cell_size
+		if (shape[0].size() - 1) * .5 != shape_center.x:
+			new_pos.x += draggable_center_offset_compensation.x * ((shape[0].size() - 1) * .5)
+		
+		if (shape.size() - 1) * .5 != shape_center.y:
+			new_pos.y += draggable_center_offset_compensation.y * ((shape.size() - 1) * .5)
+		
 		global_transform.origin = new_pos
 
 func drag_start():
