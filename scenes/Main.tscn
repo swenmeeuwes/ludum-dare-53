@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://djtf5tu6y73gv"]
+[gd_scene load_steps=5 format=3 uid="uid://b08q4f8fg7qk4"]
 
 [ext_resource type="PackedScene" uid="uid://dqryi0j7f0gq5" path="res://actors/Draggable/Draggable.tscn" id="1_7d4wj"]
+[ext_resource type="PackedScene" uid="uid://s0l8abil5srd" path="res://actors/DraggableShapeManager/DraggableShapeManager.tscn" id="1_bj7er"]
 [ext_resource type="PackedScene" uid="uid://byjvcq8h4dsbc" path="res://actors/DragManager/DragManager.tscn" id="1_fna66"]
 [ext_resource type="PackedScene" uid="uid://c72qrpgmrbtfr" path="res://actors/DragTarget/DragTarget.tscn" id="3_ftwwk"]
 
@@ -8,10 +9,31 @@
 
 [node name="Game" type="Node2D" parent="."]
 
+[node name="DraggableShapeManager" parent="Game" instance=ExtResource("1_bj7er")]
+
 [node name="DragManager" parent="Game" instance=ExtResource("1_fna66")]
 
 [node name="DragTarget" parent="Game" instance=ExtResource("3_ftwwk")]
-position = Vector2(502, 205)
+position = Vector2(432, 244)
+available_slots = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
 
 [node name="Draggable" parent="Game" instance=ExtResource("1_7d4wj")]
-position = Vector2(201, 130)
+position = Vector2(704, 140)
+
+[node name="Draggable2" parent="Game" instance=ExtResource("1_7d4wj")]
+position = Vector2(202, 210)
+
+[node name="Draggable3" parent="Game" instance=ExtResource("1_7d4wj")]
+position = Vector2(635, 481)
+
+[node name="Draggable4" parent="Game" instance=ExtResource("1_7d4wj")]
+position = Vector2(784, 363)
+
+[node name="Draggable5" parent="Game" instance=ExtResource("1_7d4wj")]
+position = Vector2(164, 418)
+
+[node name="Draggable6" parent="Game" instance=ExtResource("1_7d4wj")]
+position = Vector2(259, 493)
+
+[node name="Draggable7" parent="Game" instance=ExtResource("1_7d4wj")]
+position = Vector2(427, 557)

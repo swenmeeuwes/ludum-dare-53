@@ -14,26 +14,56 @@ signal disallow_draggable_to_slot(draggable, dragTarget)
 @onready var sprite = $Sprite2D
 @onready var collision_shape = $CollisionShape2D
 
-var slotted_draggable: Draggable
+var slotted_draggables: Array[Draggable]
 var draggable_in_body: Draggable
 
 func slot(draggable: Draggable):
-	slotted_draggable = draggable
+	var relative_position = draggable.position - position
+	var shape_position = _relative_position_to_shape_index_position(relative_position)
+	occupy_slots(draggable, shape_position, draggable.shape_center)
+	
+	slotted_draggables.append(draggable)
+
+func unslot(draggable: Draggable):
+	var relative_position = draggable.last_slotted_position - position
+	var shape_position = _relative_position_to_shape_index_position(relative_position)
+	print(shape_position)
+	free_slots(draggable, shape_position, draggable.shape_center)
+	
+	print(available_slots)
+	
+	var removeIndex = slotted_draggables.find(draggable)
+	slotted_draggables.remove_at(removeIndex)
 
 func can_slot_draggable(draggable):
 	var relative_position = draggable_in_body.position - position
-	var shape_position = _world_position_to_shape_position(relative_position)
+	var shape_position = _relative_position_to_shape_index_position(relative_position)
 	
-	return _shape_fits(draggable_in_body.shape, shape_position)
+	return _shape_fits(draggable_in_body.shape, shape_position, draggable.shape_center)
 
 func draggable_position_to_slot_position(draggable):
 	var relative_position = draggable_in_body.position - position
-	var shape_position = _world_position_to_shape_position(relative_position)
+	var shape_position = _relative_position_to_shape_index_position(relative_position)
 	
-	return position + shape_position * cell_size
+	var draggable_center_offset_compensation = Vector2(draggable.shape[0].size() * .5, draggable.shape.size() * .5) * cell_size
+	var half_size = Vector2(available_slots.size(), available_slots[0].size()) * .5 * cell_size
+	var relative_position_from_top_left = relative_position - half_size
+	var half_cell_size = Vector2.ONE * cell_size * .5
 
-func unslot():
-	slotted_draggable = null
+	var target_position = position + -half_size + shape_position * cell_size + half_cell_size
+	if (draggable.shape[0].size() - 1) * .5 != draggable.shape_center.x:
+		target_position.x += draggable_center_offset_compensation.x
+	
+	if (draggable.shape.size() - 1) * .5 != draggable.shape_center.y:
+		target_position.y += draggable_center_offset_compensation.y * ((draggable.shape.size() - 1) * .5)
+	
+	return target_position
+	
+	#return relative_position_from_top_left + shape_position * cell_size# + draggable_center_offset_compensation
+	
+	#return position + shape_position * cell_size - drag_target_center_offset_compensation + draggable_center_offset_compensation
+	#return position + shape_position * cell_size # - Vector2(floor(available_slots.size() * .5), floor(available_slots[0].size() *.5)) * cell_size
+		#+ Vector2((draggable.shape_center.x * .5), (draggable.shape_center.y * .5)) * cell_size
 
 func _process(delta):
 	if not draggable_in_body:
@@ -61,14 +91,17 @@ func _on_body_exited(body):
 	
 	draggable_in_body = null
 
-func _shape_fits(candidate_shape, at):
-	#print(candidate_shape)
+func _shape_fits(candidate_shape, at, shape_center):
+#	print(candidate_shape)
+#	print("---")
+#	print(at)
 	for y in range(0, candidate_shape.size()):
 		for x in range(0, candidate_shape[0].size()):
-			# print(x, ",", y, ": ", + shape[y][x])
+#			print(x, ",", y, ": ", + candidate_shape[y][x])
 			var candidate_cell = candidate_shape[y][x]
 			if candidate_cell == 1:
-				var targetPos = Vector2(x, y) + at
+				var targetPos = Vector2(x, y) + at - shape_center
+#				print(targetPos)
 				if not cell_is_free(targetPos):
 					return false
 	
@@ -83,5 +116,33 @@ func cell_is_free(position: Vector2):
 	
 	return available_slots[position.y][position.x] == 1
 
-func _world_position_to_shape_position(world_position: Vector2):
-	return round(world_position / cell_size)
+func occupy_slots(draggable: Draggable, at, shape_center):
+	var candidate_shape = draggable.shape
+	for y in range(0, candidate_shape.size()):
+		for x in range(0, candidate_shape[0].size()):
+			var candidate_cell = candidate_shape[y][x]
+			if candidate_cell == 1:
+				var targetPos = Vector2(x, y) + at - shape_center
+				if cell_is_free(targetPos):
+					print(targetPos, "no longer available")
+					available_slots[targetPos.y][targetPos.x] = 0
+				else:
+					push_warning("[DragManager] Tried to occupy already occupied slot.")
+
+func free_slots(draggable: Draggable, at, shape_center):
+	var candidate_shape = draggable.shape
+	for y in range(0, candidate_shape.size()):
+		for x in range(0, candidate_shape[0].size()):
+			var candidate_cell = candidate_shape[y][x]
+			if candidate_cell == 1:
+				var targetPos = Vector2(x, y) + at - shape_center
+				if cell_is_free(targetPos):
+					push_warning("[DragManager] Tried to free already freed slot.")
+				else:
+					print(targetPos, "freed")
+					available_slots[targetPos.y][targetPos.x] = 1
+
+# outputs indexes of available_slot array of arrays
+func _relative_position_to_shape_index_position(relative_position: Vector2):
+	var pos = relative_position + Vector2(available_slots.size() * .5, available_slots[0].size() *.5) * cell_size
+	return floor(pos / cell_size)

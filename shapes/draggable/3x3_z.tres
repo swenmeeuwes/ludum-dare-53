@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DraggableShape" load_steps=3 format=3 uid="uid://dbd2sksg8snir"]
+
+[ext_resource type="Script" path="res://actors/DraggableShapeManager/DraggableShape.gd" id="1_h2flj"]
+[ext_resource type="Texture2D" uid="uid://f77gnra6kn7e" path="res://assets/placeholder_draggable_3x3z.png" id="2_umgen"]
+
+[resource]
+script = ExtResource("1_h2flj")
+texture = ExtResource("2_umgen")
+shape = [[0, 0, 1], [1, 1, 1], [1, 0, 0]]
+shape_center = Vector2(1, 1)
