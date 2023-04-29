@@ -64,11 +64,16 @@ func _process(delta):
 func drag_start():
 	if held:
 		return
+	
+	_move_to_front()
 	held = true
 
 func drag_end():
 	if held:
 		held = false
+
+func _move_to_front():
+	get_parent().move_child(self, get_parent().get_child_count())
 
 func slot(drag_target: DragTarget):
 	current_drag_target = drag_target
