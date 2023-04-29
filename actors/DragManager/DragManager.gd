@@ -34,9 +34,18 @@ func _unhandled_input(event):
 			held_draggable = null
 
 func _on_draggable_clicked(draggable: Draggable):
-	if !held_draggable:
-		held_draggable = draggable
-		draggable.drag_start()
+	if held_draggable:
+		return
+	
+	if draggable.current_drag_target:
+		if draggable.current_drag_target != null:
+					draggable.current_drag_target.unslot(draggable)
+		draggable.unslot()
+		draggable.move_back_to_position()
+		return
+	
+	held_draggable = draggable
+	draggable.drag_start()
 
 func _on_allow_draggable_to_slot(draggable: Draggable, dragTarget: DragTarget):
 	entered_drag_target = dragTarget
