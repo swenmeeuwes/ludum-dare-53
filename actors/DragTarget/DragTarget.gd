@@ -30,7 +30,7 @@ func unslot(draggable: Draggable):
 	
 	# Remove any previously added offset
 	if (draggable.shape[0].size() - 1) * .5 != draggable.shape_center.x:
-		relative_position.x -= draggable_center_offset_compensation.x
+		relative_position.x -= draggable_center_offset_compensation.x * ((draggable.shape[0].size() - 1) * .5)
 	
 	if (draggable.shape.size() - 1) * .5 != draggable.shape_center.y:
 		relative_position.y -= draggable_center_offset_compensation.y * ((draggable.shape.size() - 1) * .5)
@@ -63,7 +63,7 @@ func draggable_position_to_slot_position(draggable):
 	
 	# Add offset so that the visuals snap nicely
 	if (draggable.shape[0].size() - 1) * .5 != draggable.shape_center.x:
-		target_position.x += draggable_center_offset_compensation.x
+		target_position.x += draggable_center_offset_compensation.x * ((draggable.shape[0].size() - 1) * .5)
 	
 	if (draggable.shape.size() - 1) * .5 != draggable.shape_center.y:
 		target_position.y += draggable_center_offset_compensation.y * ((draggable.shape.size() - 1) * .5)

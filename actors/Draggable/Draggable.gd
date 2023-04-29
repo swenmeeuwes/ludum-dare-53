@@ -3,7 +3,7 @@ class_name Draggable extends RigidBody2D
 signal clicked(draggable)
 
 # 1 means that the draggable occupies this space
-@export var shape = [
+@export var shape: Array = [
 	[0, 0, 0],
 	[0, 0, 0],
 	[0, 0, 0]
@@ -20,6 +20,9 @@ var original_position: Vector2
 
 var current_drag_target: DragTarget
 var last_slotted_position = Vector2.ZERO
+
+var can_rotate = true
+var current_rotation = 0
 
 func _ready():
 	# TEST START
@@ -77,3 +80,33 @@ func move_back_to_position():
 	
 	var translate_tween = create_tween()
 	translate_tween.tween_property(self, "position", target_position, .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func rotate_clockwise():
+	if not can_rotate:
+		return
+	
+	print("rotate!")
+	
+	can_rotate = false
+	
+	var rotation_increment = 90
+	current_rotation += rotation_increment 
+	
+	rotate_shape()
+	
+	var rotate_tween = create_tween()
+	await rotate_tween.tween_property(self, "rotation_degrees", rotation_increment, .15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).as_relative()
+	
+	can_rotate = true
+
+func rotate_shape():
+	shape = rotate_array(shape)
+	
+func rotate_array(arr: Array) -> Array:
+	var rotated_arr = []
+	for i in range(arr[0].size()):
+		var row = []
+		for j in range(arr.size() - 1, -1, -1):
+			row.append(arr[j][i])
+		rotated_arr.append(row)
+	return rotated_arr

@@ -4,6 +4,8 @@ extends Node2D
 var held_draggable: Draggable
 var entered_drag_target: DragTarget
 
+var right_mouse_button_was_pressed = false
+
 func _ready():
 	_initialize_dragging()
 
@@ -32,6 +34,15 @@ func _unhandled_input(event):
 				else:
 					held_draggable.move_back_to_position()
 			held_draggable = null
+	
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if held_draggable and event.pressed and not right_mouse_button_was_pressed:
+			held_draggable.rotate_clockwise();
+			right_mouse_button_was_pressed = true
+		
+		if not event.pressed:
+			right_mouse_button_was_pressed = false
+
 
 func _on_draggable_clicked(draggable: Draggable):
 	if held_draggable:
