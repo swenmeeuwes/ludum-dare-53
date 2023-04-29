@@ -15,7 +15,7 @@
 
 [node name="DragTarget" parent="Game" instance=ExtResource("3_ftwwk")]
 position = Vector2(432, 244)
-available_slots = [[1, 1, 1], [1, 1, 1], [1, 1, 1]]
+available_slots = [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
 
 [node name="Draggable" parent="Game" instance=ExtResource("1_7d4wj")]
 position = Vector2(704, 140)

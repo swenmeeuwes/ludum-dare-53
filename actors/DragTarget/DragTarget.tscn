@@ -4,17 +4,112 @@
 [ext_resource type="Script" path="res://actors/DragTarget/DragTarget.gd" id="1_qxcp7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0ju4"]
-size = Vector2(96, 96)
+size = Vector2(160, 160)
 
 [node name="DragTarget" type="Area2D" groups=["drag_target"]]
 script = ExtResource("1_qxcp7")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(3, 3)
-texture = ExtResource("1_gisg6")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d0ju4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-64, -64)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-32, -64)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(0, -64)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(32, -64)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(64, -64)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(-64, -32)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+position = Vector2(-32, -32)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D8" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D9" type="Sprite2D" parent="."]
+position = Vector2(32, -32)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D10" type="Sprite2D" parent="."]
+position = Vector2(64, -32)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D11" type="Sprite2D" parent="."]
+position = Vector2(-64, 0)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D12" type="Sprite2D" parent="."]
+position = Vector2(-32, 0)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D13" type="Sprite2D" parent="."]
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D14" type="Sprite2D" parent="."]
+position = Vector2(32, 0)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D15" type="Sprite2D" parent="."]
+position = Vector2(64, 0)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D16" type="Sprite2D" parent="."]
+position = Vector2(-64, 32)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D17" type="Sprite2D" parent="."]
+position = Vector2(-32, 32)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D18" type="Sprite2D" parent="."]
+position = Vector2(0, 32)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D19" type="Sprite2D" parent="."]
+position = Vector2(32, 32)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D20" type="Sprite2D" parent="."]
+position = Vector2(64, 32)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D21" type="Sprite2D" parent="."]
+position = Vector2(-64, 64)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D22" type="Sprite2D" parent="."]
+position = Vector2(-32, 64)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D23" type="Sprite2D" parent="."]
+position = Vector2(0, 64)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D24" type="Sprite2D" parent="."]
+position = Vector2(32, 64)
+texture = ExtResource("1_gisg6")
+
+[node name="Sprite2D25" type="Sprite2D" parent="."]
+position = Vector2(64, 64)
+texture = ExtResource("1_gisg6")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
