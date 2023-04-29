@@ -11,7 +11,7 @@
 [node name="DragManager" parent="Game" instance=ExtResource("1_fna66")]
 
 [node name="DragTarget" parent="Game" instance=ExtResource("3_ftwwk")]
-position = Vector2(39, 39)
+position = Vector2(502, 205)
 
 [node name="Draggable" parent="Game" instance=ExtResource("1_7d4wj")]
 position = Vector2(201, 130)

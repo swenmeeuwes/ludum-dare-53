@@ -2,6 +2,13 @@ class_name Draggable extends RigidBody2D
 
 signal clicked(draggable)
 
+# 1 means that the draggable occupies this space
+@export var shape = [
+	[0, 1, 0],
+	[0, 1, 0],
+	[0, 0, 0]
+]
+
 var held = false
 var original_position: Vector2
 
@@ -34,8 +41,10 @@ func drag_end():
 func slot(drag_target: DragTarget):
 	current_drag_target = drag_target
 	
+	var slotted_position = drag_target.draggable_position_to_slot_position(self)
+	
 	var translate_tween = create_tween()
-	translate_tween.tween_property(self, "position", drag_target.position, .15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	translate_tween.tween_property(self, "position", slotted_position, .15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func unslot():
 	if current_drag_target == null:

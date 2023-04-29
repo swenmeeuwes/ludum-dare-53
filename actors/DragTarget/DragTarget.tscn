@@ -4,12 +4,13 @@
 [ext_resource type="Script" path="res://actors/DragTarget/DragTarget.gd" id="1_qxcp7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0ju4"]
-size = Vector2(32, 32)
+size = Vector2(96, 96)
 
 [node name="DragTarget" type="Area2D" groups=["drag_target"]]
 script = ExtResource("1_qxcp7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
 texture = ExtResource("1_gisg6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
