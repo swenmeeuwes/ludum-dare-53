@@ -9,6 +9,7 @@ extends Node
 @export var ship: Ship
 @export var round_timer: Timer
 @export var play_mode_audio: AudioStreamPlayer2D
+@export var idle_mode_audio: AudioStreamPlayer2D
 var draggable_spawners = []
 
 var time_left = 0
@@ -26,6 +27,8 @@ func _ready():
 	final_score_label.visible = false
 	
 	ship.ship_filled.connect(_on_ship_filled)
+	
+	idle_mode_audio.play()
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -74,12 +77,25 @@ func start():
 	for draggableSpawner in draggable_spawners:
 		draggableSpawner.spawn_draggable()
 	
-	round_timer.start()
+	var idle_mode_audio_tween = create_tween()
+	idle_mode_audio_tween.tween_property(idle_mode_audio, "volume_db", -80, .65)
+	
+	play_mode_audio.volume_db = -80
 	play_mode_audio.play()
+	
+	var play_mode_audio_tween = create_tween()
+	play_mode_audio_tween.tween_property(play_mode_audio, "volume_db", 0, .65)
+	await play_mode_audio_tween.finished
+	
+	idle_mode_audio.stop()
+	
+	round_timer.start()
 
 func end():
 	round_timer.stop()
 	play_mode_audio.stop()
+	
+	idle_mode_audio.play()
 	
 #	_add_score(ship.get_score())
 	
