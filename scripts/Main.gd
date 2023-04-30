@@ -8,6 +8,7 @@ extends Node
 @export var final_score_label: Label
 @export var ship: Ship
 @export var round_timer: Timer
+@export var play_mode_audio: AudioStreamPlayer2D
 var draggable_spawners = []
 
 var time_left = 0
@@ -74,9 +75,11 @@ func start():
 		draggableSpawner.spawn_draggable()
 	
 	round_timer.start()
+	play_mode_audio.play()
 
 func end():
 	round_timer.stop()
+	play_mode_audio.stop()
 	
 #	_add_score(ship.get_score())
 	
