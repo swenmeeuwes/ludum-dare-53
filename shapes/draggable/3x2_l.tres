@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="DraggableShape" load_steps=3 format=3 uid="uid://bl21dgxjayp3w"]
 
 [ext_resource type="Script" path="res://actors/DraggableShapeManager/DraggableShape.gd" id="1_cn6sm"]
-[ext_resource type="Texture2D" uid="uid://djst5mqf0pkr8" path="res://assets/placeholder_draggable_3x2l.png" id="2_7kblr"]
+[ext_resource type="Texture2D" uid="uid://dewk1ekb20sji" path="res://assets/mermaid.png" id="2_pgsj8"]
 
 [resource]
 script = ExtResource("1_cn6sm")
-texture = ExtResource("2_7kblr")
+texture = ExtResource("2_pgsj8")
 shape = [[0, 0, 1], [1, 1, 1]]
 shape_center_0 = Vector2(1, 1)
 shape_center_90 = Vector2(0, 1)

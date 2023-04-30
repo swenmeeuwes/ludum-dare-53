@@ -43,7 +43,7 @@ func _unhandled_input(event):
 			held_draggable = null
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
-		if held_draggable and event.pressed and not right_mouse_button_was_pressed:
+		if is_instance_valid(held_draggable) and held_draggable and event.pressed and not right_mouse_button_was_pressed:
 			held_draggable.rotate_clockwise();
 			right_mouse_button_was_pressed = true
 		

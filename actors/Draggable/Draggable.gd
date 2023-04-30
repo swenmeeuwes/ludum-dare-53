@@ -8,6 +8,8 @@ signal clicked(draggable)
 	[0, 0, 0],
 	[0, 0, 0]
 ]
+@export var click_audio: AudioStreamPlayer2D
+@export var release_audio: AudioStreamPlayer2D
 
 @onready var sprite = $Sprite
 @onready var collision_shape = $CollisionShape2D
@@ -64,6 +66,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and can_interact:
 			clicked.emit(self)
+			click_audio.play()
 
 func _process(delta):
 	if held:
@@ -94,6 +97,7 @@ func drag_start():
 func drag_end():
 	if held:
 		held = false
+		release_audio.play()
 
 func _move_to_front():
 	get_parent().move_child(self, get_parent().get_child_count())

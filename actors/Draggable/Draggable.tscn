@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqryi0j7f0gq5"]
+[gd_scene load_steps=6 format=3 uid="uid://dqryi0j7f0gq5"]
 
 [ext_resource type="Script" path="res://actors/Draggable/Draggable.gd" id="1_dp1wd"]
 [ext_resource type="Texture2D" uid="uid://crefpm5t2lc3m" path="res://assets/canon.png" id="2_v73sd"]
+[ext_resource type="AudioStream" uid="uid://bmo26chl5qlpx" path="res://sound/click_1.ogg" id="3_y04r0"]
+[ext_resource type="AudioStream" uid="uid://dycxop2n3m2u3" path="res://sound/click_1_low.ogg" id="4_8btu5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0owt"]
 size = Vector2(32, 32)
 
-[node name="Draggable" type="RigidBody2D" groups=["draggable"]]
+[node name="Draggable" type="RigidBody2D" node_paths=PackedStringArray("click_audio", "release_audio") groups=["draggable"]]
 gravity_scale = 0.0
 script = ExtResource("1_dp1wd")
+click_audio = NodePath("ClickAudio")
+release_audio = NodePath("ReleaseAudio")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(2.98023e-08, 0)
@@ -16,5 +20,11 @@ texture = ExtResource("2_v73sd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_i0owt")
+
+[node name="ClickAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_y04r0")
+
+[node name="ReleaseAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_8btu5")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
