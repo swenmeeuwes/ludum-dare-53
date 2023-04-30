@@ -31,7 +31,7 @@ func _ready():
 	idle_mode_audio.play()
 
 func _input(event):
-	if event is InputEventKey and event.pressed:
+	if event is InputEventKey or event is InputEventMouseButton and event.pressed:
 		start()
 
 func _set_time_left(time_left_in_seconds):
