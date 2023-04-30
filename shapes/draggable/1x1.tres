@@ -7,4 +7,12 @@
 script = ExtResource("1_m1ubv")
 texture = ExtResource("2_tps2e")
 shape = [[1]]
-shape_center = Vector2(0, 0)
+shape_center_0 = Vector2(0, 0)
+shape_center_90 = Vector2(0, 0)
+shape_center_180 = Vector2(0, 0)
+shape_center_270 = Vector2(0, 0)
+offset_0 = Vector2(0, 0)
+offset_90 = Vector2(0, 0)
+offset_180 = Vector2(0, 0)
+offset_270 = Vector2(0, 0)
+score = 10

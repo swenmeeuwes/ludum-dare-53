@@ -30,6 +30,8 @@ func spawn_draggable():
 	draggable.offset_180 = random_shape.offset_180
 	draggable.offset_270 = random_shape.offset_270
 	
+	draggable.score = random_shape.score
+	
 	current_draggable = draggable
 	current_draggable.clicked.connect(_on_draggable_clicked)
 	
@@ -39,7 +41,7 @@ func clear_draggable():
 	if not current_draggable:
 		return
 	
-	current_draggable.clicked.disconnect(_on_draggable_clicked)
+#	current_draggable.clicked.disconnect(_on_draggable_clicked)
 	current_draggable.queue_free()
 	current_draggable = null
 	

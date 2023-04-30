@@ -13,3 +13,5 @@ class_name DraggableShape extends Resource
 @export var offset_90 = Vector2(0, 0)
 @export var offset_180 = Vector2(0, 0)
 @export var offset_270 = Vector2(0, 0)
+
+@export var score = 0

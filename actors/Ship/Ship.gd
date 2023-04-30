@@ -1,5 +1,7 @@
 class_name Ship extends Node2D
 
+signal ship_filled(score)
+
 @onready var drag_target: DragTarget = $DragTarget
 
 var initial_position
@@ -13,6 +15,8 @@ func move_out_of_view_instant():
 
 func _on_drag_target_filled():
 	print("Ship is full!")
+	
+	ship_filled.emit(drag_target.get_score())
 	
 	drag_target.lock_draggables()
 	drag_target.reparent_draggables(self)

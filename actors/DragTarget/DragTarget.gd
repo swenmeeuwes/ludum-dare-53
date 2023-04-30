@@ -24,6 +24,13 @@ func _ready():
 	initial_available_slots = available_slots.duplicate(true)
 	print(initial_available_slots)
 
+func get_score():
+	var score = 0
+	for draggable in slotted_draggables_and_occupied_slots:
+		score += draggable.score
+	
+	return score
+
 func slot(draggable: Draggable, at):
 	var relative_position = at - position
 	var shape_position = _relative_position_to_shape_index_position(relative_position)
@@ -52,7 +59,8 @@ func reparent_draggables(new_parent):
 
 func clear_draggables():
 	for draggable in slotted_draggables_and_occupied_slots:
-		draggable.queue_free()
+		if is_instance_valid(draggable):
+			draggable.queue_free()
 		
 	slotted_draggables_and_occupied_slots.clear()
 	print(initial_available_slots)

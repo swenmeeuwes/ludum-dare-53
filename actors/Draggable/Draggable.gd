@@ -23,6 +23,8 @@ var offset_90 = Vector2.ZERO
 var offset_180 = Vector2.ZERO
 var offset_270 = Vector2.ZERO
 
+var score = 0
+
 var cell_size = 96
 
 var held = false

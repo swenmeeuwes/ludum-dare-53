@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bakylumy0cn6j"]
+[gd_scene load_steps=11 format=3 uid="uid://bakylumy0cn6j"]
 
 [ext_resource type="PackedScene" uid="uid://cm8dok4e2v35j" path="res://actors/DraggableShapeManager/DraggableShapeManager.tscn" id="1_bj7er"]
 [ext_resource type="PackedScene" uid="uid://dwwce23hth1o5" path="res://actors/Ship/Ship.tscn" id="1_eli20"]
@@ -12,15 +12,21 @@
 font = ExtResource("7_sigua")
 font_size = 72
 
+[sub_resource type="LabelSettings" id="LabelSettings_3gj8p"]
+font = ExtResource("7_sigua")
+font_size = 128
+
 [sub_resource type="LabelSettings" id="LabelSettings_w4psh"]
 font = ExtResource("7_sigua")
 font_size = 96
 
-[node name="Main" type="Node" node_paths=PackedStringArray("time_left_label", "press_to_start_label", "ship", "round_timer")]
+[node name="Main" type="Node" node_paths=PackedStringArray("time_left_label", "press_to_start_label", "score_label", "final_score_label", "ship", "round_timer")]
 script = ExtResource("1_hjccw")
 time_in_seconds_per_round = 60
 time_left_label = NodePath("Foreground UI/TimeLeftLabel")
 press_to_start_label = NodePath("Foreground UI/PressToStartLabel")
+score_label = NodePath("Foreground UI/ScoreLabel")
+final_score_label = NodePath("Foreground UI/FinalScoreLabel")
 ship = NodePath("Game/Ship")
 round_timer = NodePath("RoundTimer")
 
@@ -82,16 +88,43 @@ mouse_filter = 2
 
 [node name="TimeLeftLabel" type="Label" parent="Foreground UI"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -182.0
-offset_top = 28.0
-offset_right = 184.0
-offset_bottom = 80.0
-grow_horizontal = 2
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 581.0
+offset_bottom = 109.0
 text = "TIME LEFT: 00:00"
 label_settings = SubResource("LabelSettings_gfggo")
+
+[node name="ScoreLabel" type="Label" parent="Foreground UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -581.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 109.0
+grow_horizontal = 0
+text = "SCORE: 00000"
+label_settings = SubResource("LabelSettings_gfggo")
+horizontal_alignment = 2
+
+[node name="FinalScoreLabel" type="Label" parent="Foreground UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -573.5
+offset_top = -209.0
+offset_right = 573.5
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "FINAL SCORE: 00000"
+label_settings = SubResource("LabelSettings_3gj8p")
+horizontal_alignment = 2
 
 [node name="PressToStartLabel" type="Label" parent="Foreground UI"]
 layout_mode = 1
@@ -100,10 +133,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -183.0
-offset_top = -26.0
-offset_right = 183.0
-offset_bottom = 26.0
+offset_left = -650.5
+offset_top = -50.5
+offset_right = 650.5
+offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "- PRESS ANY KEY TO START -"
