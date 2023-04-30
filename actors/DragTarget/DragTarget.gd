@@ -15,8 +15,14 @@ signal filled
 @onready var sprite = $Sprite2D
 @onready var collision_shape = $CollisionShape2D
 
+var initial_available_slots
+
 var slotted_draggables_and_occupied_slots = {}
 var draggable_in_body: Draggable
+
+func _ready():
+	initial_available_slots = available_slots.duplicate(true)
+	print(initial_available_slots)
 
 func slot(draggable: Draggable, at):
 	var relative_position = at - position
@@ -55,6 +61,15 @@ func lock_draggables():
 func reparent_draggables(new_parent):
 	for draggable in slotted_draggables_and_occupied_slots:
 		draggable.reparent(new_parent)
+
+func clear_draggables():
+	for draggable in slotted_draggables_and_occupied_slots:
+		draggable.queue_free()
+		
+	slotted_draggables_and_occupied_slots.clear()
+	print(initial_available_slots)
+	available_slots = initial_available_slots
+	print(available_slots)
 
 func can_slot_draggable(draggable, at):
 	var relative_position = at - position
