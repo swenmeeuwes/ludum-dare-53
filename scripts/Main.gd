@@ -13,6 +13,7 @@ var draggable_spawners = []
 var time_left = 0
 var score = 0
 var is_playing = false
+var ended = false
 
 func _ready():
 	draggable_spawners = get_tree().get_nodes_in_group("draggable_spawner")
@@ -45,6 +46,9 @@ func _set_score(new_score):
 	score_label.text = "SCORE: %05d" % [score]
 
 func start():
+	if ended:
+		get_tree().reload_current_scene()
+	
 	if is_playing:
 		return
 	
@@ -74,7 +78,10 @@ func start():
 func end():
 	round_timer.stop()
 	
+#	_add_score(ship.get_score())
+	
 	final_score_label.text = "FINAL SCORE: %05d" % score
+	press_to_start_label.text = "- Press any key to restart -"
 	
 	for draggableSpawner in draggable_spawners:
 		draggableSpawner.clear_draggable()
@@ -86,11 +93,13 @@ func end():
 	_hide_score_label()
 	
 	await ship.move_out_of_view()
+	ship.move_just_out_of_view()
 	
 	await _show_final_score_label()
 	await _show_press_to_start_label()
 	
 	is_playing = false
+	ended = true
 
 func _check_for_round_end():
 	if time_left > 0:

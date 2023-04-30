@@ -13,6 +13,9 @@ func _ready():
 func move_out_of_view_instant():
 	position = Vector2.RIGHT * 1000
 
+func get_score():
+	return drag_target.get_score()
+
 func _on_drag_target_filled():
 	print("Ship is full!")
 	
@@ -24,7 +27,12 @@ func _on_drag_target_filled():
 	await move_out_of_view()
 	drag_target.clear_draggables()
 	await move_in_to_view()
+
+func move_just_out_of_view():
+	var translate_tween = create_tween()
+	translate_tween.tween_property(self, "position", Vector2.RIGHT * 1000, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	
+	await translate_tween.finished
 
 func move_out_of_view():
 	var translate_tween = create_tween()

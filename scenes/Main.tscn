@@ -22,7 +22,7 @@ font_size = 96
 
 [node name="Main" type="Node" node_paths=PackedStringArray("time_left_label", "press_to_start_label", "score_label", "final_score_label", "ship", "round_timer")]
 script = ExtResource("1_hjccw")
-time_in_seconds_per_round = 60
+time_in_seconds_per_round = 3
 time_left_label = NodePath("Foreground UI/TimeLeftLabel")
 press_to_start_label = NodePath("Foreground UI/PressToStartLabel")
 score_label = NodePath("Foreground UI/ScoreLabel")
@@ -141,6 +141,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "- PRESS ANY KEY TO START -"
 label_settings = SubResource("LabelSettings_w4psh")
+uppercase = true
 
 [node name="RoundTimer" type="Timer" parent="."]
 
