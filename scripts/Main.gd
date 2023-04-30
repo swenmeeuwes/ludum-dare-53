@@ -100,7 +100,7 @@ func end():
 #	_add_score(ship.get_score())
 	
 	final_score_label.text = "FINAL SCORE: %05d" % score
-	press_to_start_label.text = "- Press any key to restart -"
+	press_to_start_label.text = "- Press any key to reset -"
 	
 	for draggableSpawner in draggable_spawners:
 		draggableSpawner.clear_draggable()
