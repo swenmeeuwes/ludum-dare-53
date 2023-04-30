@@ -26,6 +26,8 @@ var current_rotation = 0
 
 var can_interact = true
 
+var texture
+
 func _ready():
 	# TEST START
 #	var draggable_shapes_manager = get_tree().get_first_node_in_group("DraggableShapeManager")
@@ -35,6 +37,9 @@ func _ready():
 #	shape = random_shape.shape
 #	shape_center = random_shape.shape_center
 	# TEST END
+	
+	sprite.texture = texture
+	update_collision_shape()
 	
 	original_position = global_position
 	input_pickable = true # Makes _on_input_event work
@@ -120,7 +125,9 @@ func rotate_clockwise():
 	rotate_shape()
 	
 	var rotate_tween = create_tween()
-	await rotate_tween.tween_property(self, "rotation_degrees", rotation_increment, .15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).as_relative()
+	rotate_tween.tween_property(self, "rotation_degrees", rotation_increment, .15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT).as_relative()
+	
+	await rotate_tween.finished
 	
 	can_rotate = true
 

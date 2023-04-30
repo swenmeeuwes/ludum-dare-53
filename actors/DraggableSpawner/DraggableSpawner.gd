@@ -14,15 +14,14 @@ func _ready():
 
 func _spawn_draggable():
 	var draggable = draggable_scene.instantiate()
-	add_child(draggable)
+	get_parent().add_child.call_deferred(draggable)
+	draggable.global_position = global_position
 	
 	var random_shape = draggable_shapes_manager.get_random_shape()
 
-	draggable.sprite.texture = random_shape.texture
+	draggable.texture = random_shape.texture
 	draggable.shape = random_shape.shape
 	draggable.shape_center = random_shape.shape_center
-
-	draggable.update_collision_shape()
 	
 	current_draggable = draggable
 	current_draggable.clicked.connect(_on_draggable_clicked)
