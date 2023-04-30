@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c72qrpgmrbtfr"]
+[gd_scene load_steps=5 format=3 uid="uid://c72qrpgmrbtfr"]
 
 [ext_resource type="Texture2D" uid="uid://bjcee6aq7jj3g" path="res://assets/placeholder_slot.png" id="1_gisg6"]
 [ext_resource type="Script" path="res://actors/DragTarget/DragTarget.gd" id="1_qxcp7"]
+[ext_resource type="Texture2D" uid="uid://vsorhh13f01p" path="res://assets/grid.png" id="2_4322v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4xkj6"]
 size = Vector2(480, 480)
@@ -12,22 +13,29 @@ script = ExtResource("1_qxcp7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4xkj6")
 
+[node name="GridSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_4322v")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-192, -192)
 scale = Vector2(3, 3)
 texture = ExtResource("1_gisg6")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-192, -96)
 scale = Vector2(3, 3)
 texture = ExtResource("1_gisg6")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-96, -192)
 scale = Vector2(3, 3)
 texture = ExtResource("1_gisg6")
 
 [node name="Sprite2D4" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-96, -96)
 scale = Vector2(3, 3)
 texture = ExtResource("1_gisg6")

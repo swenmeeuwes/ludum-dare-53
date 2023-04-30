@@ -46,11 +46,15 @@ func unslot(draggable: Draggable):
 	free_slots(occupied_slots)
 	
 	print("available slots: ", available_slots)
-	slotted_draggables_and_occupied_slots[draggable] = null
+	slotted_draggables_and_occupied_slots.erase(draggable)
 
 func lock_draggables():
 	for draggable in slotted_draggables_and_occupied_slots:
 		draggable.disable_interaction()
+
+func reparent_draggables(new_parent):
+	for draggable in slotted_draggables_and_occupied_slots:
+		draggable.reparent(new_parent)
 
 func can_slot_draggable(draggable, at):
 	var relative_position = at - position

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bakylumy0cn6j"]
+[gd_scene load_steps=6 format=3 uid="uid://bakylumy0cn6j"]
 
 [ext_resource type="PackedScene" uid="uid://cm8dok4e2v35j" path="res://actors/DraggableShapeManager/DraggableShapeManager.tscn" id="1_bj7er"]
 [ext_resource type="PackedScene" uid="uid://dwwce23hth1o5" path="res://actors/Ship/Ship.tscn" id="1_eli20"]
 [ext_resource type="PackedScene" uid="uid://byjvcq8h4dsbc" path="res://actors/DragManager/DragManager.tscn" id="1_fna66"]
+[ext_resource type="Texture2D" uid="uid://c2nxrpq48fe6w" path="res://assets/sea .png" id="5_ovyve"]
 [ext_resource type="PackedScene" uid="uid://ddkawqn7nmpm3" path="res://actors/DraggableSpawner/DraggableSpawner.tscn" id="10_uxfpb"]
 
 [node name="Main" type="Node"]
@@ -49,3 +50,7 @@ drag_manager = NodePath("../DragManager")
 [node name="DraggableSpawner4" parent="Game" node_paths=PackedStringArray("drag_manager") instance=ExtResource("10_uxfpb")]
 position = Vector2(529, 851)
 drag_manager = NodePath("../DragManager")
+
+[node name="Sea" type="Sprite2D" parent="Game"]
+position = Vector2(960, 600)
+texture = ExtResource("5_ovyve")
