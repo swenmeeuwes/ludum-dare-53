@@ -7,4 +7,7 @@
 script = ExtResource("1_fe4h0")
 texture = ExtResource("2_g1hx3")
 shape = [[0, 0, 1], [1, 1, 1], [1, 0, 0]]
-shape_center = Vector2(1, 1)
+shape_center_0 = Vector2(1, 1)
+shape_center_90 = Vector2(1, 1)
+shape_center_180 = Vector2(1, 1)
+shape_center_270 = Vector2(1, 1)

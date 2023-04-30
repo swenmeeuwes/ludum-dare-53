@@ -21,7 +21,15 @@ func _spawn_draggable():
 
 	draggable.texture = random_shape.texture
 	draggable.shape = random_shape.shape
-	draggable.shape_center = random_shape.shape_center
+	draggable.shape_center_0 = random_shape.shape_center_0
+	draggable.shape_center_90 = random_shape.shape_center_90
+	draggable.shape_center_180 = random_shape.shape_center_180
+	draggable.shape_center_270 = random_shape.shape_center_270
+	
+	draggable.offset_0 = random_shape.offset_0
+	draggable.offset_90 = random_shape.offset_90
+	draggable.offset_180 = random_shape.offset_180
+	draggable.offset_270 = random_shape.offset_270
 	
 	current_draggable = draggable
 	current_draggable.clicked.connect(_on_draggable_clicked)

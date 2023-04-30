@@ -13,6 +13,16 @@ signal clicked(draggable)
 @onready var collision_shape = $CollisionShape2D
 var shape_center = Vector2.ZERO
 
+var shape_center_0 = Vector2.ZERO
+var shape_center_90 = Vector2.ZERO
+var shape_center_180 = Vector2.ZERO
+var shape_center_270 = Vector2.ZERO
+
+var offset_0 = Vector2.ZERO
+var offset_90 = Vector2.ZERO
+var offset_180 = Vector2.ZERO
+var offset_270 = Vector2.ZERO
+
 var cell_size = 96
 
 var held = false
@@ -45,6 +55,8 @@ func _ready():
 	input_pickable = true # Makes _on_input_event work
 	freeze = true # Disables physics by default
 	freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC # Make it so that body enter signals are still fired
+	
+	recalculate_shape_center()
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
 	if event is InputEventMouseButton:
@@ -56,13 +68,19 @@ func _process(delta):
 		var new_pos = get_global_mouse_position()
 		
 		var draggable_center_offset_compensation = Vector2(shape[0].size() * .5, shape.size() * .5) * cell_size
-		if (shape[0].size() - 1) * .5 != shape_center.x:
-			new_pos.x += draggable_center_offset_compensation.x * ((shape[0].size() - 1) * .5)
+		new_pos += draggable_center_offset_compensation
+		new_pos -= Vector2.ONE * cell_size * .5 # Center on 0,0 cell
+		new_pos -= shape_center * cell_size # Center on shape center
 		
-		if (shape.size() - 1) * .5 != shape_center.y:
-			new_pos.y += draggable_center_offset_compensation.y * ((shape.size() - 1) * .5)
 		
-		global_transform.origin = new_pos
+#		if (shape[0].size() - 1) * .5 != shape_center.x:
+#			new_pos.x += draggable_center_offset_compensation.x * ((shape[0].size() - 1) * .5)
+#
+#		if (shape.size() - 1) * .5 != shape_center.y:
+#			new_pos.y += draggable_center_offset_compensation.y * ((shape.size() - 1) * .5)
+		
+		global_position = new_pos
+#		global_transform.origin = new_pos
 
 func drag_start():
 	if held:
@@ -127,11 +145,16 @@ func rotate_clockwise():
 	
 	await rotate_tween.finished
 	
+	if current_rotation >= 360:
+		current_rotation = 0
+		rotation_degrees = 0
+	
 	can_rotate = true
 
 func rotate_shape():
 	shape = rotate_array(shape)
-	
+	recalculate_shape_center()
+
 func rotate_array(arr: Array) -> Array:
 	var rotated_arr = []
 	for i in range(arr[0].size()):
@@ -141,8 +164,38 @@ func rotate_array(arr: Array) -> Array:
 		rotated_arr.append(row)
 	return rotated_arr
 
+func recalculate_shape_center():
+#	print("rot", current_rotation)
+	match current_rotation:
+		0, 360:
+			shape_center = shape_center_0
+		90:
+			shape_center = shape_center_90
+		180:
+			shape_center = shape_center_180
+		270:
+			shape_center = shape_center_270
+	
+#	print("shape_center", shape_center)
+#	var center_y = max(0, ceil(shape.size() / 2) - 1)
+#	var center_x = max(0, ceil(shape[0].size() / 2) - 1)
+#
+#	print("shape_center", shape_center)
+#	shape_center = Vector2(center_x, center_y)
+
 func update_collision_shape():
 	var rect_shape = RectangleShape2D.new()
 	rect_shape.size = Vector2(cell_size * shape[0].size(), cell_size * shape.size())
 	
 	collision_shape.shape = rect_shape
+
+func get_slotted_offset():
+	match current_rotation:
+		0, 360:
+			return offset_0
+		90:
+			return offset_90
+		180:
+			return offset_180
+		270:
+			return offset_270

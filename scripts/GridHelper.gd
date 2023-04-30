@@ -1,6 +1,6 @@
 class_name GridHelper
 
-const grid_size = 32
+const grid_size = 96
 
 static func snap_position_to_grid(position):
 	var x_off = int(position.x) % grid_size
