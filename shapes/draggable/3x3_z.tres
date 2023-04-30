@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="DraggableShape" load_steps=3 format=3 uid="uid://dbd2sksg8snir"]
+[gd_resource type="Resource" script_class="DraggableShape" load_steps=3 format=3 uid="uid://cyeung5lak8re"]
 
-[ext_resource type="Script" path="res://actors/DraggableShapeManager/DraggableShape.gd" id="1_h2flj"]
-[ext_resource type="Texture2D" uid="uid://f77gnra6kn7e" path="res://assets/placeholder_draggable_3x3z.png" id="2_umgen"]
+[ext_resource type="Script" path="res://actors/DraggableShapeManager/DraggableShape.gd" id="1_fe4h0"]
+[ext_resource type="Texture2D" uid="uid://f77gnra6kn7e" path="res://assets/placeholder_draggable_3x3z.png" id="2_bvvcp"]
 
 [resource]
-script = ExtResource("1_h2flj")
-texture = ExtResource("2_umgen")
+script = ExtResource("1_fe4h0")
+texture = ExtResource("2_bvvcp")
 shape = [[0, 0, 1], [1, 1, 1], [1, 0, 0]]
 shape_center = Vector2(1, 1)

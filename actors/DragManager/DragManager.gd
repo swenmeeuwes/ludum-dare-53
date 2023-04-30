@@ -1,4 +1,4 @@
-extends Node2D
+class_name DragManager extends Node2D
 
 
 var held_draggable: Draggable
@@ -8,6 +8,13 @@ var right_mouse_button_was_pressed = false
 
 func _ready():
 	_initialize_dragging()
+
+func register_draggable(draggable: Draggable):
+	draggable.clicked.connect(_on_draggable_clicked)
+
+func register_drag_target(drag_target: DragTarget):
+	drag_target.allow_draggable_to_slot.connect(_on_allow_draggable_to_slot)
+	drag_target.disallow_draggable_to_slot.connect(_on_disallow_draggable_to_slot)
 
 func _initialize_dragging():
 	for draggable in get_tree().get_nodes_in_group("draggable"):
@@ -25,14 +32,14 @@ func _unhandled_input(event):
 				if held_draggable.current_drag_target != null:
 					held_draggable.current_drag_target.unslot(held_draggable)
 				held_draggable.unslot()
-				held_draggable.move_back_to_position()
+				held_draggable.fall_off_screen_and_destroy()
 			else:
 				var canSlot = entered_drag_target.can_slot_draggable(held_draggable)
 				if canSlot:
 					held_draggable.slot(entered_drag_target)
 					entered_drag_target.slot(held_draggable)
 				else:
-					held_draggable.move_back_to_position()
+					held_draggable.fall_off_screen_and_destroy()
 			held_draggable = null
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
@@ -52,7 +59,7 @@ func _on_draggable_clicked(draggable: Draggable):
 		if draggable.current_drag_target != null:
 					draggable.current_drag_target.unslot(draggable)
 		draggable.unslot()
-		draggable.move_back_to_position()
+		draggable.fall_off_screen_and_destroy()
 		return
 	
 	held_draggable = draggable

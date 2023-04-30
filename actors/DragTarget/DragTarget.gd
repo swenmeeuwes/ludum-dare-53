@@ -2,6 +2,7 @@ class_name DragTarget extends Area2D
 
 signal allow_draggable_to_slot(draggable, dragTarget)
 signal disallow_draggable_to_slot(draggable, dragTarget)
+signal filled
 
 # 1 means that there is space for a draggable there
 @export var available_slots = [
@@ -9,7 +10,7 @@ signal disallow_draggable_to_slot(draggable, dragTarget)
 	[0, 1, 0],
 	[1, 1, 1]
 ]
-@export var cell_size = 32 # in pixels
+@export var cell_size = 96 # in pixels
 
 @onready var sprite = $Sprite2D
 @onready var collision_shape = $CollisionShape2D
@@ -25,7 +26,7 @@ func slot(draggable: Draggable):
 	slotted_draggables.append(draggable)
 	
 	if (is_full()):
-		print("Full!")
+		filled.emit()
 
 func unslot(draggable: Draggable):
 	var draggable_center_offset_compensation = Vector2(draggable.shape[0].size() * .5, draggable.shape.size() * .5) * cell_size
@@ -47,14 +48,18 @@ func unslot(draggable: Draggable):
 	var removeIndex = slotted_draggables.find(draggable)
 	slotted_draggables.remove_at(removeIndex)
 
+func lock_draggables():
+	for draggable in slotted_draggables:
+		draggable.disable_interaction()
+
 func can_slot_draggable(draggable):
-	var relative_position = draggable_in_body.position - position
+	var relative_position = draggable_in_body.global_position - position
 	var shape_position = _relative_position_to_shape_index_position(relative_position)
 	
 	return _shape_fits(draggable_in_body.shape, shape_position, draggable.shape_center)
 
 func draggable_position_to_slot_position(draggable):
-	var relative_position = draggable_in_body.position - position
+	var relative_position = draggable_in_body.global_position - position
 	var shape_position = _relative_position_to_shape_index_position(relative_position)
 	
 	var draggable_center_offset_compensation = Vector2(draggable.shape[0].size() * .5, draggable.shape.size() * .5) * cell_size

@@ -13,7 +13,7 @@ signal clicked(draggable)
 @onready var collision_shape = $CollisionShape2D
 var shape_center = Vector2.ZERO
 
-var cell_size = 32
+var cell_size = 96
 
 var held = false
 var original_position: Vector2
@@ -24,28 +24,26 @@ var last_slotted_position = Vector2.ZERO
 var can_rotate = true
 var current_rotation = 0
 
+var can_interact = true
+
 func _ready():
 	# TEST START
-	var draggable_shapes_manager = get_tree().get_first_node_in_group("DraggableShapeManager")
-	var random_shape = draggable_shapes_manager.get_random_shape()
-
-	sprite.texture = random_shape.texture
-	shape = random_shape.shape
-	shape_center = random_shape.shape_center
-
-	var rect_shape = RectangleShape2D.new()
-	rect_shape.size = Vector2(cell_size * shape[0].size(), cell_size * shape.size())
-	collision_shape.shape = rect_shape
+#	var draggable_shapes_manager = get_tree().get_first_node_in_group("DraggableShapeManager")
+#	var random_shape = draggable_shapes_manager.get_random_shape()
+#
+#	sprite.texture = random_shape.texture
+#	shape = random_shape.shape
+#	shape_center = random_shape.shape_center
 	# TEST END
 	
-	original_position = position
+	original_position = global_position
 	input_pickable = true # Makes _on_input_event work
 	freeze = true # Disables physics by default
 	freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC # Make it so that body enter signals are still fired
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and can_interact:
 			clicked.emit(self)
 
 func _process(delta):
@@ -81,7 +79,7 @@ func slot(drag_target: DragTarget):
 	last_slotted_position = drag_target.draggable_position_to_slot_position(self)
 	
 	var translate_tween = create_tween()
-	translate_tween.tween_property(self, "position", last_slotted_position, .15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	translate_tween.tween_property(self, "global_position", last_slotted_position, .15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func unslot():
 	current_drag_target = null
@@ -92,7 +90,21 @@ func move_back_to_position():
 		target_position = last_slotted_position
 	
 	var translate_tween = create_tween()
-	translate_tween.tween_property(self, "position", target_position, .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	translate_tween.tween_property(self, "global_position", target_position, .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func fall_off_screen_and_destroy():
+	disable_interaction()
+	
+	print("stya")
+	var translate_tween = create_tween()
+	translate_tween.tween_property(self, "global_position", Vector2.DOWN * 1500, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN).as_relative()
+	
+	await translate_tween.finished
+	print("end")
+	queue_free()
+
+func disable_interaction():
+	can_interact = false
 
 func rotate_clockwise():
 	if not can_rotate:
@@ -123,3 +135,9 @@ func rotate_array(arr: Array) -> Array:
 			row.append(arr[j][i])
 		rotated_arr.append(row)
 	return rotated_arr
+
+func update_collision_shape():
+	var rect_shape = RectangleShape2D.new()
+	rect_shape.size = Vector2(cell_size * shape[0].size(), cell_size * shape.size())
+	
+	collision_shape.shape = rect_shape

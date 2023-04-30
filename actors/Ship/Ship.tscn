@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwwce23hth1o5"]
+
+[ext_resource type="Script" path="res://actors/Ship/Ship.gd" id="1_0qtxu"]
+[ext_resource type="PackedScene" uid="uid://c72qrpgmrbtfr" path="res://actors/DragTarget/DragTarget.tscn" id="1_6cqxp"]
+[ext_resource type="Texture2D" uid="uid://k7gqshsr8ewr" path="res://assets/ship.png" id="2_ubhu6"]
+
+[node name="Ship" type="Node2D"]
+script = ExtResource("1_0qtxu")
+
+[node name="DragTarget" parent="." instance=ExtResource("1_6cqxp")]
+position = Vector2(1258, 563)
+available_slots = [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("2_ubhu6")
