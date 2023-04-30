@@ -34,10 +34,10 @@ func _unhandled_input(event):
 				held_draggable.unslot()
 				held_draggable.fall_off_screen_and_destroy()
 			else:
-				var canSlot = entered_drag_target.can_slot_draggable(held_draggable)
+				var canSlot = entered_drag_target.can_slot_draggable(held_draggable, event.position)
 				if canSlot:
-					held_draggable.slot(entered_drag_target)
-					entered_drag_target.slot(held_draggable)
+					held_draggable.slot(entered_drag_target, event.position)
+					entered_drag_target.slot(held_draggable, event.position)
 				else:
 					held_draggable.fall_off_screen_and_destroy()
 			held_draggable = null

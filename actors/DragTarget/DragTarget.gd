@@ -18,8 +18,8 @@ signal filled
 var slotted_draggables: Array[Draggable]
 var draggable_in_body: Draggable
 
-func slot(draggable: Draggable):
-	var relative_position = draggable.position - position
+func slot(draggable: Draggable, at):
+	var relative_position = at - position
 	var shape_position = _relative_position_to_shape_index_position(relative_position)
 	occupy_slots(draggable, shape_position, draggable.shape_center)
 	
@@ -43,7 +43,7 @@ func unslot(draggable: Draggable):
 	print(shape_position)
 	free_slots(draggable, shape_position, draggable.shape_center)
 	
-#	print(available_slots)
+	print("available slots: ", available_slots)
 	
 	var removeIndex = slotted_draggables.find(draggable)
 	slotted_draggables.remove_at(removeIndex)
@@ -52,14 +52,15 @@ func lock_draggables():
 	for draggable in slotted_draggables:
 		draggable.disable_interaction()
 
-func can_slot_draggable(draggable):
-	var relative_position = draggable_in_body.global_position - position
+func can_slot_draggable(draggable, at):
+	var relative_position = at - position
 	var shape_position = _relative_position_to_shape_index_position(relative_position)
+	print(relative_position, shape_position)
 	
 	return _shape_fits(draggable_in_body.shape, shape_position, draggable.shape_center)
 
-func draggable_position_to_slot_position(draggable):
-	var relative_position = draggable_in_body.global_position - position
+func draggable_position_to_slot_position(draggable, at):
+	var relative_position = at - position
 	var shape_position = _relative_position_to_shape_index_position(relative_position)
 	
 	var draggable_center_offset_compensation = Vector2(draggable.shape[0].size() * .5, draggable.shape.size() * .5) * cell_size
@@ -90,7 +91,7 @@ func _process(delta):
 	if not draggable_in_body:
 		return
 	
-	var can_slot = can_slot_draggable(draggable_in_body)
+#	var can_slot = can_slot_draggable(draggable_in_body)
 #	print(fits)
 
 func _on_body_entered(body):

@@ -1,21 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bakylumy0cn6j"]
+[gd_scene load_steps=5 format=3 uid="uid://bakylumy0cn6j"]
 
 [ext_resource type="PackedScene" uid="uid://cm8dok4e2v35j" path="res://actors/DraggableShapeManager/DraggableShapeManager.tscn" id="1_bj7er"]
 [ext_resource type="PackedScene" uid="uid://dwwce23hth1o5" path="res://actors/Ship/Ship.tscn" id="1_eli20"]
 [ext_resource type="PackedScene" uid="uid://byjvcq8h4dsbc" path="res://actors/DragManager/DragManager.tscn" id="1_fna66"]
-[ext_resource type="Resource" uid="uid://c4ndhtwuxlwgh" path="res://shapes/draggable/1x1.tres" id="4_3ggeu"]
-[ext_resource type="Resource" uid="uid://cyeung5lak8re" path="res://shapes/draggable/3x3_z.tres" id="6_mr2wr"]
-[ext_resource type="Resource" uid="uid://bf77xbn4eqedo" path="res://shapes/draggable/2x2.tres" id="7_mux5d"]
-[ext_resource type="Script" path="res://actors/DraggableShapeManager/DraggableShape.gd" id="7_qb6a7"]
-[ext_resource type="Texture2D" uid="uid://cc3go2sqrvw23" path="res://assets/placeholder_draggable_1x2.png" id="8_ih0mm"]
-[ext_resource type="Resource" uid="uid://dbd2sksg8snir" path="res://shapes/draggable/3x2_t.tres" id="8_ymelg"]
 [ext_resource type="PackedScene" uid="uid://ddkawqn7nmpm3" path="res://actors/DraggableSpawner/DraggableSpawner.tscn" id="10_uxfpb"]
-
-[sub_resource type="Resource" id="Resource_kj2r3"]
-script = ExtResource("7_qb6a7")
-texture = ExtResource("8_ih0mm")
-shape = [[1], [1]]
-shape_center = Vector2(0, 0)
 
 [node name="Main" type="Node"]
 
@@ -43,7 +31,6 @@ color = Color(0.121569, 0.301961, 0.282353, 1)
 [node name="Ship" parent="Game" instance=ExtResource("1_eli20")]
 
 [node name="DraggableShapeManager" parent="Game" instance=ExtResource("1_bj7er")]
-draggable_shapes = Array[ExtResource("7_qb6a7")]([ExtResource("4_3ggeu"), ExtResource("7_mux5d"), ExtResource("8_ymelg"), SubResource("Resource_kj2r3"), ExtResource("6_mr2wr")])
 
 [node name="DragManager" parent="Game" instance=ExtResource("1_fna66")]
 

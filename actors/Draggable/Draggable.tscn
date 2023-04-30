@@ -9,6 +9,7 @@ size = Vector2(32, 32)
 [node name="Draggable" type="RigidBody2D" groups=["draggable"]]
 gravity_scale = 0.0
 script = ExtResource("1_dp1wd")
+shape = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(2.98023e-08, 0)

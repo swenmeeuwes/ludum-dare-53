@@ -78,10 +78,10 @@ func drag_end():
 func _move_to_front():
 	get_parent().move_child(self, get_parent().get_child_count())
 
-func slot(drag_target: DragTarget):
+func slot(drag_target: DragTarget, at):
 	current_drag_target = drag_target
 	
-	last_slotted_position = drag_target.draggable_position_to_slot_position(self)
+	last_slotted_position = drag_target.draggable_position_to_slot_position(self, at)
 	
 	var translate_tween = create_tween()
 	translate_tween.tween_property(self, "global_position", last_slotted_position, .15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -100,12 +100,10 @@ func move_back_to_position():
 func fall_off_screen_and_destroy():
 	disable_interaction()
 	
-	print("stya")
 	var translate_tween = create_tween()
 	translate_tween.tween_property(self, "global_position", Vector2.DOWN * 1500, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN).as_relative()
 	
 	await translate_tween.finished
-	print("end")
 	queue_free()
 
 func disable_interaction():

@@ -1,10 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm8dok4e2v35j"]
+[gd_scene load_steps=7 format=3 uid="uid://cm8dok4e2v35j"]
 
 [ext_resource type="Script" path="res://actors/DraggableShapeManager/DraggableShapeManager.gd" id="1_kdcm2"]
 [ext_resource type="Resource" uid="uid://c4ndhtwuxlwgh" path="res://shapes/draggable/1x1.tres" id="2_ymwc6"]
+[ext_resource type="Resource" uid="uid://c0bf2n4uun2ll" path="res://shapes/draggable/1x2.tres" id="3_4ah38"]
 [ext_resource type="Resource" uid="uid://bf77xbn4eqedo" path="res://shapes/draggable/2x2.tres" id="3_vbge2"]
 [ext_resource type="Resource" uid="uid://dbd2sksg8snir" path="res://shapes/draggable/3x2_t.tres" id="4_g04qp"]
+[ext_resource type="Resource" uid="uid://cyeung5lak8re" path="res://shapes/draggable/3x3_z.tres" id="6_i2bac"]
 
 [node name="DraggableShapeManager" type="Node" groups=["DraggableShapeManager"]]
 script = ExtResource("1_kdcm2")
-draggable_shapes = Array[Resource("res://actors/DraggableShapeManager/DraggableShape.gd")]([ExtResource("2_ymwc6"), ExtResource("3_vbge2"), ExtResource("4_g04qp")])
+draggable_shapes = Array[Resource("res://actors/DraggableShapeManager/DraggableShape.gd")]([ExtResource("2_ymwc6"), ExtResource("3_4ah38"), ExtResource("3_vbge2"), ExtResource("4_g04qp"), ExtResource("6_i2bac")])
