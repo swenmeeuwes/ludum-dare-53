@@ -26,7 +26,7 @@ func _initialize_dragging():
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if held_draggable and !event.pressed:
+		if is_instance_valid(held_draggable) and held_draggable and !event.pressed:
 			held_draggable.drag_end()
 			if entered_drag_target == null:
 				if held_draggable.current_drag_target != null:

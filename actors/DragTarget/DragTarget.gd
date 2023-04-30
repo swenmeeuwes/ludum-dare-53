@@ -35,18 +35,6 @@ func slot(draggable: Draggable, at):
 		filled.emit()
 
 func unslot(draggable: Draggable):
-#	var draggable_center_offset_compensation = Vector2(draggable.shape[0].size() * .5, draggable.shape.size() * .5) * cell_size
-#	var relative_position = draggable.last_slotted_position - position
-#
-#	# Remove any previously added offset
-#	if (draggable.shape[0].size() - 1) * .5 != draggable.shape_center.x:
-#		relative_position.x -= draggable_center_offset_compensation.x * ((draggable.shape[0].size() - 1) * .5)
-#
-#	if (draggable.shape.size() - 1) * .5 != draggable.shape_center.y:
-#		relative_position.y -= draggable_center_offset_compensation.y * ((draggable.shape.size() - 1) * .5)
-#
-#	var shape_position = _relative_position_to_shape_index_position(relative_position)
-#	print(shape_position)
 	var occupied_slots = slotted_draggables_and_occupied_slots.get(draggable)
 
 	free_slots(occupied_slots)
@@ -68,7 +56,7 @@ func clear_draggables():
 		
 	slotted_draggables_and_occupied_slots.clear()
 	print(initial_available_slots)
-	available_slots = initial_available_slots
+	available_slots = initial_available_slots.duplicate(true)
 	print(available_slots)
 
 func can_slot_draggable(draggable, at):
@@ -81,13 +69,6 @@ func can_slot_draggable(draggable, at):
 func draggable_position_to_slot_position(draggable, at):
 	var relative_position = at - global_position
 	var shape_position = _relative_position_to_shape_index_position(relative_position)
-	
-#	var shape_center_x_delta = -draggable.shape_center.x
-#	var shape_center_y_delta = -draggable.shape_center.y
-#	print("shape_center_x_delta", shape_center_x_delta)
-#
-#	shape_position.x -= shape_center_x_delta
-#	shape_position.y -= shape_center_y_delta
 	
 	var draggable_center_offset_compensation = Vector2(draggable.shape[0].size() * .5, draggable.shape.size() * .5) * cell_size
 	var half_size = Vector2(available_slots.size(), available_slots[0].size()) * .5 * cell_size
@@ -102,28 +83,6 @@ func draggable_position_to_slot_position(draggable, at):
 	target_position += shape_position * cell_size
 	target_position += draggable.get_slotted_offset() * cell_size
 	
-#	if draggable.shape.size() % 2 == 0:
-#		target_position.y += cell_size * .5
-#
-#	if draggable.shape[0].size() % 2 == 0:
-#		target_position.x += cell_size * .5
-	
-#	print("target_position", target_position)
-#	var target_position = position + -half_size + shape_position * cell_size + half_cell_size
-	
-	# Add offset so that the visuals snap nicely
-#	if (draggable.shape[0].size() - 1) * .5 != draggable.shape_center.x:
-#		target_position.x -= draggable_center_offset_compensation.x
-#
-#	if (draggable.shape.size() - 1) * .5 != draggable.shape_center.y:
-#		target_position.y -= draggable_center_offset_compensation.y
-	
-#	if draggable.shape.size() % 2 == 0:
-#		target_position.y -= cell_size * .5
-#
-#	if draggable.shape[0].size() % 2 == 0:
-#		target_position.x -= cell_size * .5
-	
 	return target_position
 
 func is_full():
@@ -137,9 +96,6 @@ func is_full():
 func _process(delta):
 	if not draggable_in_body:
 		return
-	
-#	var can_slot = can_slot_draggable(draggable_in_body)
-#	print(fits)
 
 func _on_body_entered(body):
 	if not body.is_in_group("draggable"):
@@ -202,19 +158,6 @@ func occupy_slots(draggable: Draggable, at, shape_center):
 					push_warning("[DragManager] Tried to occupy already occupied slot.")
 	
 	return occupied_slots
-
-#func free_slots_old(draggable: Draggable, at, shape_center):
-#	var candidate_shape = draggable.shape
-#	for y in range(0, candidate_shape.size()):
-#		for x in range(0, candidate_shape[0].size()):
-#			var candidate_cell = candidate_shape[y][x]
-#			if candidate_cell == 1:
-#				var targetPos = Vector2(x, y) + at - shape_center
-#				if cell_is_free(targetPos):
-#					push_warning("[DragManager] Tried to free already freed slot.")
-#				else:
-#					print(targetPos, "freed")
-#					available_slots[targetPos.y][targetPos.x] = 1
 
 func free_slots(slots):
 	for slot in slots:

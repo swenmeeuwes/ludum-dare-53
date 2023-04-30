@@ -1,4 +1,4 @@
-extends Node2D
+class_name Ship extends Node2D
 
 @onready var drag_target: DragTarget = $DragTarget
 
@@ -8,24 +8,27 @@ func _ready():
 	initial_position = position
 	drag_target.filled.connect(_on_drag_target_filled)
 
+func move_out_of_view_instant():
+	position = Vector2.RIGHT * 1000
+
 func _on_drag_target_filled():
 	print("Ship is full!")
 	
 	drag_target.lock_draggables()
 	drag_target.reparent_draggables(self)
 	
-	await _move_out_of_view()
+	await move_out_of_view()
 	drag_target.clear_draggables()
-	await _move_back_to_view()
+	await move_in_to_view()
 	
 
-func _move_out_of_view():
+func move_out_of_view():
 	var translate_tween = create_tween()
 	translate_tween.tween_property(self, "position", Vector2.RIGHT * 1920, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN).as_relative()
 	
 	await translate_tween.finished
 
-func _move_back_to_view():
+func move_in_to_view():
 	var translate_tween = create_tween()
 	translate_tween.tween_property(self, "position", initial_position, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	

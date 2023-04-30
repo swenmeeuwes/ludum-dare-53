@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://actors/DraggableSpawner/DraggableSpawner.gd" id="1_d165x"]
 
-[node name="DraggableSpawner" type="Node2D"]
+[node name="DraggableSpawner" type="Node2D" groups=["draggable_spawner"]]
 script = ExtResource("1_d165x")
 
 [node name="SpawnTimer" type="Timer" parent="."]
