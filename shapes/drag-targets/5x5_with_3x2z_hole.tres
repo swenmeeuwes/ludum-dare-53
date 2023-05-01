@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DragTargetShape" load_steps=3 format=3 uid="uid://dtd1d6xssmd6s"]
+
+[ext_resource type="Script" path="res://actors/DragTargetShapeManager/DragTargetShape.gd" id="1_kh6f2"]
+[ext_resource type="Texture2D" uid="uid://d01cllr62a5i0" path="res://assets/ruim2.png" id="2_xwdmy"]
+
+[resource]
+script = ExtResource("1_kh6f2")
+texture = ExtResource("2_xwdmy")
+shape = [[1, 1, 1, 1, 1], [1, 1, 1, 0, 1], [1, 0, 0, 0, 1], [1, 0, 1, 1, 1], [1, 1, 1, 1, 1]]
