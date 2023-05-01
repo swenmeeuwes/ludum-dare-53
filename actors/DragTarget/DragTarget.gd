@@ -74,7 +74,7 @@ func can_slot_draggable(draggable, at):
 	var shape_position = _relative_position_to_shape_index_position(relative_position)
 	print(relative_position, shape_position)
 	
-	return _shape_fits(draggable_in_body.shape, shape_position, draggable.shape_center)
+	return _shape_fits(draggable.shape, shape_position, draggable.shape_center)
 
 func draggable_position_to_slot_position(draggable, at):
 	var relative_position = at - global_position
@@ -102,10 +102,6 @@ func is_full():
 				return false
 	
 	return true
-
-func _process(delta):
-	if not draggable_in_body:
-		return
 
 func _on_body_entered(body):
 	if not body.is_in_group("draggable") or not body.held:

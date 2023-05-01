@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://bakylumy0cn6j"]
+[gd_scene load_steps=15 format=3 uid="uid://bakylumy0cn6j"]
 
 [ext_resource type="PackedScene" uid="uid://cm8dok4e2v35j" path="res://actors/DraggableShapeManager/DraggableShapeManager.tscn" id="1_bj7er"]
 [ext_resource type="PackedScene" uid="uid://dwwce23hth1o5" path="res://actors/Ship/Ship.tscn" id="1_eli20"]
 [ext_resource type="PackedScene" uid="uid://byjvcq8h4dsbc" path="res://actors/DragManager/DragManager.tscn" id="1_fna66"]
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_hjccw"]
+[ext_resource type="Texture2D" uid="uid://cb534dtkev4d2" path="res://assets/sky.png" id="2_l5y82"]
 [ext_resource type="PackedScene" uid="uid://cq3rul46t8qo6" path="res://actors/DragTargetShapeManager/DragTargetShapeManager.tscn" id="4_8oxm0"]
-[ext_resource type="Texture2D" uid="uid://c2nxrpq48fe6w" path="res://assets/sea .png" id="5_ovyve"]
 [ext_resource type="FontFile" uid="uid://jbktbvd45a2g" path="res://fonts/fantaisieartistique/FantaisieArtistique.ttf" id="7_sigua"]
 [ext_resource type="AudioStream" uid="uid://djgl5jxsnryfl" path="res://sound/playing_bgm.ogg" id="8_a4r13"]
+[ext_resource type="Texture2D" uid="uid://c185va3kq6o5" path="res://assets/sea.png" id="8_p2h4x"]
 [ext_resource type="AudioStream" uid="uid://c1rduchsx416n" path="res://sound/idle-bgm.ogg" id="9_eqaac"]
 [ext_resource type="PackedScene" uid="uid://ddkawqn7nmpm3" path="res://actors/DraggableSpawner/DraggableSpawner.tscn" id="10_uxfpb"]
 
@@ -54,6 +55,12 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.121569, 0.301961, 0.282353, 1)
 
+[node name="TextureRect" type="TextureRect" parent="Background"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_l5y82")
+
 [node name="Game" type="Node2D" parent="."]
 
 [node name="Ship" parent="Game" node_paths=PackedStringArray("drag_target_shape_manager") instance=ExtResource("1_eli20")]
@@ -83,7 +90,7 @@ drag_manager = NodePath("../DragManager")
 
 [node name="Sea" type="Sprite2D" parent="Game"]
 position = Vector2(960, 600)
-texture = ExtResource("5_ovyve")
+texture = ExtResource("8_p2h4x")
 
 [node name="Foreground UI" type="Control" parent="."]
 layout_mode = 3
