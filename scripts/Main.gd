@@ -6,6 +6,7 @@ extends Node
 @export var press_to_start_label: Label
 @export var score_label: Label
 @export var final_score_label: Label
+@export var made_by_label: Label
 @export var ship: Ship
 @export var round_timer: Timer
 @export var play_mode_audio: AudioStreamPlayer2D
@@ -72,6 +73,7 @@ func start():
 	
 	_hide_press_to_start_label()
 	_hide_final_score_label()
+	_hide_made_by_label()
 	
 	var idle_mode_audio_tween = create_tween()
 	idle_mode_audio_tween.tween_property(idle_mode_audio, "volume_db", -80, 2)
@@ -121,6 +123,7 @@ func end():
 	
 	await _show_final_score_label()
 	await _show_press_to_start_label()
+	await _show_made_by_label()
 	
 	is_playing = false
 	ended = true
@@ -208,3 +211,20 @@ func _hide_final_score_label():
 	await tween.finished
 	
 	final_score_label.visible = false
+
+func _show_made_by_label():
+	made_by_label.self_modulate = Color(1, 1, 1, 0)
+	made_by_label.visible = true
+	
+	var tween = create_tween()
+	tween.tween_property(made_by_label, "self_modulate", Color(1, 1, 1, 1), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	await tween.finished
+
+func _hide_made_by_label():
+	var tween = create_tween()
+	tween.tween_property(made_by_label, "self_modulate", Color(1, 1, 1, 0), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	await tween.finished
+	
+	made_by_label.visible = false
