@@ -73,6 +73,8 @@ func start():
 	_hide_press_to_start_label()
 	_hide_final_score_label()
 	
+	var idle_mode_audio_tween = create_tween()
+	idle_mode_audio_tween.tween_property(idle_mode_audio, "volume_db", -80, 2)
 	await ship.move_in_to_view()
 	
 	await _show_time_left_label()
@@ -81,17 +83,16 @@ func start():
 	for draggableSpawner in draggable_spawners:
 		draggableSpawner.spawn_draggable()
 	
-	var idle_mode_audio_tween = create_tween()
-	idle_mode_audio_tween.tween_property(idle_mode_audio, "volume_db", -80, .65)
+
+#	play_mode_audio.volume_db = -80
+#	play_mode_audio.play()
 	
-	play_mode_audio.volume_db = -80
-	play_mode_audio.play()
-	
-	var play_mode_audio_tween = create_tween()
-	play_mode_audio_tween.tween_property(play_mode_audio, "volume_db", 0, .65)
-	await play_mode_audio_tween.finished
+#	var play_mode_audio_tween = create_tween()
+#	play_mode_audio_tween.tween_property(play_mode_audio, "volume_db", 0, .65)
+#	await play_mode_audio_tween.finished
 	
 	idle_mode_audio.stop()
+	play_mode_audio.play()
 	
 	round_timer.start()
 
