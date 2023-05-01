@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq3rul46t8qo6"]
+
+[ext_resource type="Script" path="res://actors/DragTargetShapeManager/DragTargetShapeManager.gd" id="1_f7onp"]
+[ext_resource type="Resource" uid="uid://byrrsbygxijn4" path="res://shapes/drag-targets/5x5.tres" id="2_0rk2w"]
+[ext_resource type="Resource" uid="uid://whssawubcx2m" path="res://shapes/drag-targets/5x5_with_1x1_hole.tres" id="3_52xv7"]
+
+[node name="DragTargetShapeManager" type="Node2D"]
+script = ExtResource("1_f7onp")
+drag_target_shapes = Array[Resource("res://actors/DragTargetShapeManager/DragTargetShape.gd")]([ExtResource("2_0rk2w"), ExtResource("3_52xv7")])

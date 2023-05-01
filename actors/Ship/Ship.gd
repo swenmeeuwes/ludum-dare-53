@@ -2,6 +2,9 @@ class_name Ship extends Node2D
 
 signal ship_filled(score)
 
+@export var drag_target_shape_manager: DragTargetShapeManager
+@export var grid_sprite: Sprite2D
+
 @onready var drag_target: DragTarget = $DragTarget
 
 var initial_position
@@ -9,12 +12,18 @@ var initial_position
 func _ready():
 	initial_position = position
 	drag_target.filled.connect(_on_drag_target_filled)
+	next_shape()
 
 func move_out_of_view_instant():
 	position = Vector2.RIGHT * 1000
 
 func get_score():
 	return drag_target.get_score()
+
+func next_shape():
+	var random_shape_and_texture = drag_target_shape_manager.get_random_shape()
+	drag_target.set_shape(random_shape_and_texture.shape)
+	grid_sprite.texture = random_shape_and_texture.texture
 
 func _on_drag_target_filled():
 	print("Ship is full!")
@@ -25,7 +34,7 @@ func _on_drag_target_filled():
 	drag_target.reparent_draggables(self)
 	
 	await move_out_of_view()
-	drag_target.clear_draggables()
+	next_shape()
 	await move_in_to_view()
 
 func move_just_out_of_view():

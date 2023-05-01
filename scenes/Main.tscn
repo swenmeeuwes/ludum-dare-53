@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bakylumy0cn6j"]
+[gd_scene load_steps=14 format=3 uid="uid://bakylumy0cn6j"]
 
 [ext_resource type="PackedScene" uid="uid://cm8dok4e2v35j" path="res://actors/DraggableShapeManager/DraggableShapeManager.tscn" id="1_bj7er"]
 [ext_resource type="PackedScene" uid="uid://dwwce23hth1o5" path="res://actors/Ship/Ship.tscn" id="1_eli20"]
 [ext_resource type="PackedScene" uid="uid://byjvcq8h4dsbc" path="res://actors/DragManager/DragManager.tscn" id="1_fna66"]
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_hjccw"]
+[ext_resource type="PackedScene" uid="uid://cq3rul46t8qo6" path="res://actors/DragTargetShapeManager/DragTargetShapeManager.tscn" id="4_8oxm0"]
 [ext_resource type="Texture2D" uid="uid://c2nxrpq48fe6w" path="res://assets/sea .png" id="5_ovyve"]
 [ext_resource type="FontFile" uid="uid://jbktbvd45a2g" path="res://fonts/fantaisieartistique/FantaisieArtistique.ttf" id="7_sigua"]
 [ext_resource type="AudioStream" uid="uid://djgl5jxsnryfl" path="res://sound/playing_bgm.ogg" id="8_a4r13"]
@@ -55,9 +56,12 @@ color = Color(0.121569, 0.301961, 0.282353, 1)
 
 [node name="Game" type="Node2D" parent="."]
 
-[node name="Ship" parent="Game" instance=ExtResource("1_eli20")]
+[node name="Ship" parent="Game" node_paths=PackedStringArray("drag_target_shape_manager") instance=ExtResource("1_eli20")]
+drag_target_shape_manager = NodePath("../DragTargetShapeManager")
 
 [node name="DraggableShapeManager" parent="Game" instance=ExtResource("1_bj7er")]
+
+[node name="DragTargetShapeManager" parent="Game" instance=ExtResource("4_8oxm0")]
 
 [node name="DragManager" parent="Game" instance=ExtResource("1_fna66")]
 

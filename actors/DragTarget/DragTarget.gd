@@ -22,7 +22,6 @@ var draggable_in_body: Draggable
 
 func _ready():
 	initial_available_slots = available_slots.duplicate(true)
-	print(initial_available_slots)
 
 func get_score():
 	var score = 0
@@ -49,6 +48,11 @@ func unslot(draggable: Draggable):
 	print("available slots: ", available_slots)
 	slotted_draggables_and_occupied_slots.erase(draggable)
 
+func set_shape(new_shape):
+	clear_draggables()
+	print("new shape!", new_shape)
+	available_slots = new_shape.duplicate()
+
 func lock_draggables():
 	for draggable in slotted_draggables_and_occupied_slots:
 		draggable.disable_interaction()
@@ -59,13 +63,11 @@ func reparent_draggables(new_parent):
 
 func clear_draggables():
 	for draggable in slotted_draggables_and_occupied_slots:
+		free_slots(slotted_draggables_and_occupied_slots[draggable])
 		if is_instance_valid(draggable):
 			draggable.queue_free()
 		
 	slotted_draggables_and_occupied_slots.clear()
-	print(initial_available_slots)
-	available_slots = initial_available_slots.duplicate(true)
-	print(available_slots)
 
 func can_slot_draggable(draggable, at):
 	var relative_position = at - position
