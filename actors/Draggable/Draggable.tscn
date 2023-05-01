@@ -10,6 +10,7 @@ size = Vector2(32, 32)
 
 [node name="Draggable" type="RigidBody2D" node_paths=PackedStringArray("click_audio", "release_audio") groups=["draggable"]]
 gravity_scale = 0.0
+can_sleep = false
 script = ExtResource("1_dp1wd")
 click_audio = NodePath("ClickAudio")
 release_audio = NodePath("ReleaseAudio")

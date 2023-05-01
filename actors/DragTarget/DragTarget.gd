@@ -108,7 +108,7 @@ func _process(delta):
 		return
 
 func _on_body_entered(body):
-	if not body.is_in_group("draggable"):
+	if not body.is_in_group("draggable") or not body.held:
 		return
 	
 	var draggable = body
@@ -118,7 +118,7 @@ func _on_body_entered(body):
 
 
 func _on_body_exited(body):
-	if not body.is_in_group("draggable"):
+	if not body.is_in_group("draggable") or not body.held:
 		return
 	
 	var draggable = body

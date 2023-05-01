@@ -29,6 +29,7 @@ func _unhandled_input(event):
 		if is_instance_valid(held_draggable) and held_draggable and !event.pressed:
 			held_draggable.drag_end()
 			if entered_drag_target == null:
+#				print("entered_drag_target == null")
 				if held_draggable.current_drag_target != null:
 					held_draggable.current_drag_target.unslot(held_draggable)
 				held_draggable.unslot()
@@ -66,7 +67,9 @@ func _on_draggable_clicked(draggable: Draggable):
 	draggable.drag_start()
 
 func _on_allow_draggable_to_slot(draggable: Draggable, dragTarget: DragTarget):
-	entered_drag_target = dragTarget
+	if held_draggable == draggable:
+		entered_drag_target = dragTarget
 
 func _on_disallow_draggable_to_slot(draggable: Draggable, dragTarget: DragTarget):
-	entered_drag_target = null
+	if held_draggable == draggable:
+		entered_drag_target = null
