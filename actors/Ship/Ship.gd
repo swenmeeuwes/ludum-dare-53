@@ -7,6 +7,7 @@ signal ship_filled(score)
 
 @onready var drag_target: DragTarget = $DragTarget
 
+var score_for_completing_ship
 var initial_position
 
 func _ready():
@@ -21,14 +22,15 @@ func get_score():
 	return drag_target.get_score()
 
 func next_shape():
-	var random_shape_and_texture = drag_target_shape_manager.get_random_shape()
-	drag_target.set_shape(random_shape_and_texture.shape)
-	grid_sprite.texture = random_shape_and_texture.texture
+	var random_target_shape = drag_target_shape_manager.get_random_shape()
+	drag_target.set_shape(random_target_shape.shape)
+	grid_sprite.texture = random_target_shape.texture
+	score_for_completing_ship = random_target_shape.score_for_completing_ship
 
 func _on_drag_target_filled():
 	print("Ship is full!")
 	
-	ship_filled.emit(drag_target.get_score())
+	ship_filled.emit(score_for_completing_ship + drag_target.get_score())
 	
 	drag_target.lock_draggables()
 	drag_target.reparent_draggables(self)

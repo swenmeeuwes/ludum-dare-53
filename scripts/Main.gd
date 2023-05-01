@@ -10,6 +10,7 @@ extends Node
 @export var round_timer: Timer
 @export var play_mode_audio: AudioStreamPlayer2D
 @export var idle_mode_audio: AudioStreamPlayer2D
+@export var start_audio: AudioStreamPlayer2D
 var draggable_spawners = []
 
 var time_left = 0
@@ -50,10 +51,13 @@ func _set_score(new_score):
 	score_label.text = "SCORE: %05d" % [score]
 
 func start():
+	if is_playing:
+		return
+	
+	start_audio.play()
+	
 	if ended:
 		get_tree().reload_current_scene()
-	
-	if is_playing:
 		return
 	
 	is_playing = true

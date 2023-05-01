@@ -7,3 +7,4 @@
 script = ExtResource("1_kh6f2")
 texture = ExtResource("2_xwdmy")
 shape = [[1, 1, 1, 1, 1], [1, 1, 1, 0, 1], [1, 0, 0, 0, 1], [1, 0, 1, 1, 1], [1, 1, 1, 1, 1]]
+score_for_completing_ship = 1600
