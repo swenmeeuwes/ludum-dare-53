@@ -23,7 +23,7 @@ font_size = 128
 
 [sub_resource type="LabelSettings" id="LabelSettings_w4psh"]
 font = ExtResource("7_sigua")
-font_size = 96
+font_size = 80
 
 [sub_resource type="LabelSettings" id="LabelSettings_tw7kb"]
 font = ExtResource("7_sigua")
@@ -169,6 +169,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "- PRESS ANY KEY TO START -"
 label_settings = SubResource("LabelSettings_w4psh")
+horizontal_alignment = 1
 uppercase = true
 
 [node name="GameNameLabel" type="Label" parent="Foreground UI"]
@@ -186,7 +187,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Buccaneers' Bounty"
 label_settings = SubResource("LabelSettings_tw7kb")
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="MadeByLabel" type="Label" parent="Foreground UI"]
