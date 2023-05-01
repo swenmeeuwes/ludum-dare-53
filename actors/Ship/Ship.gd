@@ -23,7 +23,7 @@ func get_score():
 
 func next_shape():
 	var random_target_shape = drag_target_shape_manager.get_random_shape()
-	drag_target.set_shape(random_target_shape.shape)
+	drag_target.set_shape(random_target_shape.shape.duplicate(true))
 	grid_sprite.texture = random_target_shape.texture
 	score_for_completing_ship = random_target_shape.score_for_completing_ship
 

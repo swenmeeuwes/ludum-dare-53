@@ -51,7 +51,7 @@ func unslot(draggable: Draggable):
 func set_shape(new_shape):
 	clear_draggables()
 	print("new shape!", new_shape)
-	available_slots = new_shape.duplicate()
+	available_slots = new_shape.duplicate(true)
 
 func lock_draggables():
 	for draggable in slotted_draggables_and_occupied_slots:
