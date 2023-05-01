@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bakylumy0cn6j"]
+[gd_scene load_steps=18 format=3 uid="uid://bakylumy0cn6j"]
 
 [ext_resource type="PackedScene" uid="uid://cm8dok4e2v35j" path="res://actors/DraggableShapeManager/DraggableShapeManager.tscn" id="1_bj7er"]
 [ext_resource type="PackedScene" uid="uid://dwwce23hth1o5" path="res://actors/Ship/Ship.tscn" id="1_eli20"]
@@ -25,12 +25,16 @@ font_size = 128
 font = ExtResource("7_sigua")
 font_size = 96
 
+[sub_resource type="LabelSettings" id="LabelSettings_tw7kb"]
+font = ExtResource("7_sigua")
+font_size = 192
+
 [sub_resource type="LabelSettings" id="LabelSettings_475w7"]
 font = ExtResource("7_sigua")
 font_size = 48
 font_color = Color(0.0941176, 0.0941176, 0.0941176, 1)
 
-[node name="Main" type="Node" node_paths=PackedStringArray("time_left_label", "press_to_start_label", "score_label", "final_score_label", "made_by_label", "ship", "round_timer", "play_mode_audio", "idle_mode_audio", "start_audio")]
+[node name="Main" type="Node" node_paths=PackedStringArray("time_left_label", "press_to_start_label", "score_label", "final_score_label", "made_by_label", "game_name_label", "ship", "round_timer", "play_mode_audio", "idle_mode_audio", "start_audio")]
 script = ExtResource("1_hjccw")
 time_in_seconds_per_round = 60
 time_left_label = NodePath("Foreground UI/TimeLeftLabel")
@@ -38,6 +42,7 @@ press_to_start_label = NodePath("Foreground UI/PressToStartLabel")
 score_label = NodePath("Foreground UI/ScoreLabel")
 final_score_label = NodePath("Foreground UI/FinalScoreLabel")
 made_by_label = NodePath("Foreground UI/MadeByLabel")
+game_name_label = NodePath("Foreground UI/GameNameLabel")
 ship = NodePath("Game/Ship")
 round_timer = NodePath("RoundTimer")
 play_mode_audio = NodePath("PlayModeAudioStreamPlayer")
@@ -140,9 +145,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -573.5
-offset_top = -209.0
+offset_top = -143.0
 offset_right = 573.5
-offset_bottom = -75.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "FINAL SCORE: 00000"
@@ -157,14 +162,32 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -650.5
-offset_top = -50.5
+offset_top = 30.0
 offset_right = 650.5
-offset_bottom = 50.5
+offset_bottom = 131.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "- PRESS ANY KEY TO START -"
 label_settings = SubResource("LabelSettings_w4psh")
 uppercase = true
+
+[node name="GameNameLabel" type="Label" parent="Foreground UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -766.0
+offset_top = -195.0
+offset_right = 766.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buccaneers' Bounty"
+label_settings = SubResource("LabelSettings_tw7kb")
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="MadeByLabel" type="Label" parent="Foreground UI"]
 layout_mode = 1

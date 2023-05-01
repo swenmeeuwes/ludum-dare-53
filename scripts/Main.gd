@@ -7,6 +7,7 @@ extends Node
 @export var score_label: Label
 @export var final_score_label: Label
 @export var made_by_label: Label
+@export var game_name_label: Label
 @export var ship: Ship
 @export var round_timer: Timer
 @export var play_mode_audio: AudioStreamPlayer2D
@@ -71,16 +72,17 @@ func start():
 	score = 0
 	_set_score(score)
 	
-	_hide_press_to_start_label()
-	_hide_final_score_label()
-	_hide_made_by_label()
+	_hide_label(press_to_start_label)
+	_hide_label(final_score_label)
+	_hide_label(made_by_label)
+	_hide_label(game_name_label)
 	
 	var idle_mode_audio_tween = create_tween()
 	idle_mode_audio_tween.tween_property(idle_mode_audio, "volume_db", -80, 2)
 	await ship.move_in_to_view()
 	
-	await _show_time_left_label()
-	await _show_score_label()
+	await _show_label(time_left_label)
+	await _show_label(score_label)
 	
 	for draggableSpawner in draggable_spawners:
 		draggableSpawner.spawn_draggable()
@@ -115,15 +117,15 @@ func end():
 	ship.drag_target.lock_draggables()
 	ship.drag_target.reparent_draggables(ship.drag_target)
 	
-	_hide_time_left_label()
-	_hide_score_label()
+	_hide_label(time_left_label)
+	_hide_label(score_label)
 	
 	await ship.move_out_of_view()
 	ship.move_just_out_of_view()
 	
-	await _show_final_score_label()
-	await _show_press_to_start_label()
-	await _show_made_by_label()
+	await _show_label(final_score_label)
+	await _show_label(press_to_start_label)
+	await _show_label(made_by_label)
 	
 	is_playing = false
 	ended = true
@@ -144,87 +146,19 @@ func _on_ship_filled(score):
 	_add_score(score)
 
 # Label show/ hide functions
-func _show_time_left_label():
-	time_left_label.self_modulate = Color(1, 1, 1, 0)
-	time_left_label.visible = true
+func _show_label(label):
+	label.self_modulate = Color(label.self_modulate.r, label.self_modulate.g, label.self_modulate.b, 0)
+	label.visible = true
 	
 	var tween = create_tween()
-	tween.tween_property(time_left_label, "self_modulate", Color(1, 1, 1, 1), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(label, "self_modulate", Color(label.self_modulate.r, label.self_modulate.g, label.self_modulate.b, 1), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
 	await tween.finished
 
-func _hide_time_left_label():
+func _hide_label(label):
 	var tween = create_tween()
-	tween.tween_property(time_left_label, "self_modulate", Color(1, 1, 1, 0), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(label, "self_modulate", Color(label.self_modulate.r, label.self_modulate.g, label.self_modulate.b, 0), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
 	await tween.finished
 	
-	time_left_label.visible = false
-
-func _show_press_to_start_label():
-	press_to_start_label.self_modulate = Color(1, 1, 1, 0)
-	press_to_start_label.visible = true
-	
-	var tween = create_tween()
-	tween.tween_property(press_to_start_label, "self_modulate", Color(1, 1, 1, 1), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	
-	await tween.finished
-
-func _hide_press_to_start_label():
-	var tween = create_tween()
-	tween.tween_property(press_to_start_label, "self_modulate", Color(1, 1, 1, 0), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	
-	await tween.finished
-	
-	press_to_start_label.visible = false
-
-func _show_score_label():
-	score_label.self_modulate = Color(1, 1, 1, 0)
-	score_label.visible = true
-	
-	var tween = create_tween()
-	tween.tween_property(score_label, "self_modulate", Color(1, 1, 1, 1), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	
-	await tween.finished
-
-func _hide_score_label():
-	var tween = create_tween()
-	tween.tween_property(score_label, "self_modulate", Color(1, 1, 1, 0), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	
-	await tween.finished
-	
-	score_label.visible = false
-
-func _show_final_score_label():
-	final_score_label.self_modulate = Color(1, 1, 1, 0)
-	final_score_label.visible = true
-	
-	var tween = create_tween()
-	tween.tween_property(final_score_label, "self_modulate", Color(1, 1, 1, 1), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	
-	await tween.finished
-
-func _hide_final_score_label():
-	var tween = create_tween()
-	tween.tween_property(final_score_label, "self_modulate", Color(1, 1, 1, 0), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	
-	await tween.finished
-	
-	final_score_label.visible = false
-
-func _show_made_by_label():
-	made_by_label.self_modulate = Color(1, 1, 1, 0)
-	made_by_label.visible = true
-	
-	var tween = create_tween()
-	tween.tween_property(made_by_label, "self_modulate", Color(1, 1, 1, 1), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	
-	await tween.finished
-
-func _hide_made_by_label():
-	var tween = create_tween()
-	tween.tween_property(made_by_label, "self_modulate", Color(1, 1, 1, 0), .45).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	
-	await tween.finished
-	
-	made_by_label.visible = false
+	label.visible = false
