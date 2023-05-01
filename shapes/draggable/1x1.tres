@@ -16,4 +16,4 @@ offset_90 = Vector2(0, 0)
 offset_180 = Vector2(0, 0)
 offset_270 = Vector2(0, 0)
 score = 10
-random_weight = 3.0
+random_weight = 150.0
