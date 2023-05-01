@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="DragTargetShape" load_steps=3 format=3 uid="uid://byrrsbygxijn4"]
 
 [ext_resource type="Script" path="res://actors/DragTargetShapeManager/DragTargetShape.gd" id="1_udk70"]
-[ext_resource type="Texture2D" uid="uid://vsorhh13f01p" path="res://assets/grid.png" id="2_ukt5c"]
+[ext_resource type="Texture2D" uid="uid://crdtr6xfyqvso" path="res://assets/ruim0.png" id="2_ip6ep"]
 
 [resource]
 script = ExtResource("1_udk70")
-texture = ExtResource("2_ukt5c")
+texture = ExtResource("2_ip6ep")
 shape = [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
 score_for_completing_ship = 1000

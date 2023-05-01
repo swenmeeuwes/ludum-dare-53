@@ -57,6 +57,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Background"]
 layout_mode = 1
@@ -79,32 +80,36 @@ texture = ExtResource("2_l5y82")
 
 [node name="Ship" parent="Game" node_paths=PackedStringArray("drag_target_shape_manager") instance=ExtResource("1_eli20")]
 drag_target_shape_manager = NodePath("../DragTargetShapeManager")
+metadata/_edit_lock_ = true
 
 [node name="DraggableShapeManager" parent="Game" instance=ExtResource("1_bj7er")]
 
 [node name="DragTargetShapeManager" parent="Game" instance=ExtResource("4_8oxm0")]
+metadata/_edit_lock_ = true
 
 [node name="DragManager" parent="Game" instance=ExtResource("1_fna66")]
+metadata/_edit_lock_ = true
 
 [node name="DraggableSpawner" parent="Game" node_paths=PackedStringArray("drag_manager") instance=ExtResource("10_uxfpb")]
-position = Vector2(192, 552)
+position = Vector2(192, 434)
 drag_manager = NodePath("../DragManager")
 
 [node name="DraggableSpawner2" parent="Game" node_paths=PackedStringArray("drag_manager") instance=ExtResource("10_uxfpb")]
-position = Vector2(512, 565)
+position = Vector2(512, 447)
 drag_manager = NodePath("../DragManager")
 
 [node name="DraggableSpawner3" parent="Game" node_paths=PackedStringArray("drag_manager") instance=ExtResource("10_uxfpb")]
-position = Vector2(186, 854)
+position = Vector2(186, 736)
 drag_manager = NodePath("../DragManager")
 
 [node name="DraggableSpawner4" parent="Game" node_paths=PackedStringArray("drag_manager") instance=ExtResource("10_uxfpb")]
-position = Vector2(529, 851)
+position = Vector2(529, 733)
 drag_manager = NodePath("../DragManager")
 
 [node name="Sea" type="Sprite2D" parent="Game"]
 position = Vector2(960, 600)
 texture = ExtResource("8_p2h4x")
+metadata/_edit_lock_ = true
 
 [node name="Foreground UI" type="Control" parent="."]
 layout_mode = 3
@@ -114,6 +119,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="TimeLeftLabel" type="Label" parent="Foreground UI"]
 layout_mode = 1
